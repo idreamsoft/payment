@@ -3,6 +3,7 @@
 namespace Payment\Common\Cmb;
 
 //use GuzzleHttp\Client;
+use Payment\Utils\Client;
 use Payment\Common\BaseData;
 use Payment\Common\BaseStrategy;
 use Payment\Common\CmbConfig;
@@ -111,7 +112,7 @@ abstract class CmbBaseStrategy implements BaseStrategy
         // TODO 检查返回的数据是否被篡改
         $flag = $this->verifySign($data);
         if (!$flag) {
-            throw new PayException('微信返回数据被篡改。请检查网络是否安全！');
+            throw new PayException('招商返回数据被篡改。请检查网络是否安全！');
         }
 
         $rspData = $data['rspData'];

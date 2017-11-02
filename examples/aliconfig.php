@@ -19,7 +19,7 @@
  * 登录密码    111111
  * 支付密码    111111
  */
-header('Content-Type: text/html; charset=UTF-8');
+// header('Content-Type: text/html; charset=UTF-8');
 ini_set('display_errors','ON');
 error_reporting(E_ALL & ~E_NOTICE);
 

@@ -28,24 +28,30 @@ var_dump($options) ;
         if($method=="POST"){
             $this->http($uri,$options);
         }else{
-            $this->http($uri);
+            $this->http($uri,$options);
         }
         return $this;
     }
 
     public function http($url, $postdata=null)
     {
+        if(empty($url)){
+            $url = $this->config['base_uri'];
+        }
         if (self::$CURLOPT_REFERER === null) {
             $uri = parse_url($url);
             self::$CURLOPT_REFERER = $uri['scheme'] . '://' . $uri['host'];
         }
-        $ch = curl_init();
+        if(isset($postdata['query'])){
+            $url = self::make($postdata['query'],$url);
+            $postdata = null;
+        }
         $options = array(
             CURLOPT_URL                     => $url,
             CURLOPT_REFERER                 => self::$CURLOPT_REFERER,
-            CURLOPT_USERAGENT               => self::$CURLOPT_USERAGENT,
+            CURLOPT_USERAGENT               => $this->config['headers']['User-Agent'],
             CURLOPT_ENCODING                => self::$CURLOPT_ENCODING,
-            CURLOPT_TIMEOUT                 => 10, //数据传输的最大允许时间
+            CURLOPT_TIMEOUT                 => $this->config['timeout'], //数据传输的最大允许时间
             CURLOPT_CONNECTTIMEOUT          => 10, //连接超时时间
             CURLOPT_RETURNTRANSFER          => 1,
             CURLOPT_FAILONERROR             => 0,
@@ -60,6 +66,7 @@ var_dump($options) ;
         );
 
         if ($postdata!==null) {
+            isset($postdata['form_params']) && $postdata['body'] = $postdata['form_params'];
             $options[CURLOPT_POST] = 1;
             $options[CURLOPT_POSTFIELDS] = $postdata['body'];
         }
@@ -103,6 +110,38 @@ echo "<hr />";
         return $option === null
             ? $this->config
             : (isset($this->config[$option]) ? $this->config[$option] : null);
+    }
+    public static function make($QS=null,$url=null) {
+        $url OR $url = $_SERVER["REQUEST_URI"];
+
+        $parse  = parse_url($url);
+        parse_str($parse['query'], $query);
+
+        $output = (array)$QS;
+        is_array($QS) OR parse_str($QS, $output);
+        foreach ($output as $key => $value) {
+            //这个null是字符
+            if($value==='null'||$value===null){
+                unset($output[$key]);
+                unset($query[$key]);
+            }
+        }
+        $query = array_merge((array)$query,(array)$output);
+        $parse['query'] = http_build_query($query);
+        $nurl = self::glue($parse);
+        return $nurl?$nurl:$url;
+    }
+    public static function glue($parsed) {
+        if (!is_array($parsed)) return false;
+
+        $uri = isset($parsed['scheme']) ? $parsed['scheme'].':'.((strtolower($parsed['scheme']) == 'mailto') ? '':'//'): '';
+        $uri.= isset($parsed['user']) ? $parsed['user'].($parsed['pass']? ':'.$parsed['pass']:'').'@':'';
+        $parsed['host']    && $uri.= $parsed['host'];
+        $parsed['port']    && $uri.= ':'.$parsed['port'];
+        $parsed['path']    && $uri.= $parsed['path'];
+        $parsed['query']   && $uri.= '?'.$parsed['query'];
+        $parsed['fragment']&& $uri.= '#'.$parsed['fragment'];
+        return $uri;
     }
     /**
      * Configures the default options for a client.
@@ -174,7 +213,7 @@ echo "<hr />";
         static $defaultAgent = '';
 
         if (!$defaultAgent) {
-            $defaultAgent = 'GuzzleHttp/' . Client::VERSION;
+            $defaultAgent = 'PaymentHttp/' . Client::VERSION;
             if (extension_loaded('curl') && function_exists('curl_version')) {
                 $curl_version = curl_version();
                 $defaultAgent .= ' curl/' . $curl_version['version'];

@@ -8,6 +8,7 @@ use Payment\Common\BaseData;
 use Payment\Common\BaseStrategy;
 use Payment\Common\PayException;
 use Payment\Config;
+use Payment\Utils\Client;
 use Payment\Utils\ArrayUtil;
 use Payment\Utils\Rsa2Encrypt;
 use Payment\Utils\RsaEncrypt;
