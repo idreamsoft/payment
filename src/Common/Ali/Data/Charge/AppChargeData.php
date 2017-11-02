@@ -18,7 +18,7 @@ class AppChargeData extends ChargeBaseData
      */
     protected function getBizContent()
     {
-        $content = [
+        $content = array(
             'body'          => strval($this->body),
             'subject'       => strval($this->subject),
             'out_trade_no'  => strval($this->order_no),
@@ -33,7 +33,7 @@ class AppChargeData extends ChargeBaseData
             // 'extend_params => '',
             'disable_pay_channels' => $this->limitPay,
             'store_id' => $this->store_id,
-        ];
+        );
 
         $timeExpire = $this->timeout_express;
         if (! empty($timeExpire)) {

@@ -8,7 +8,7 @@
  */
 
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../autoload.php';
 
 use Payment\Common\PayException;
 use Payment\Client\Charge;
@@ -19,7 +19,7 @@ $aliConfig = require_once __DIR__ . '/../aliconfig.php';
 
 // 订单信息
 $orderNo = time() . rand(1000, 9999);
-$payData = [
+$payData = array(
     'body'    => 'ali web pay',
     'subject'    => '测试支付宝电脑网站支付',
     'order_no'    => $orderNo,
@@ -33,7 +33,7 @@ $payData = [
     // 说明地址：https://doc.open.alipay.com/doc2/detail.htm?treeId=270&articleId=105901&docType=1
     // 建议什么也不填
     'qr_mod' => '',
-];
+);
 
 try {
     $url = Charge::run(Config::ALI_CHANNEL_WEB, $aliConfig, $payData);

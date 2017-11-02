@@ -1,10 +1,11 @@
 <?php
 namespace Payment\Common\Weixin;
 
-use GuzzleHttp\Client;
+//use GuzzleHttp\Client;
 use Payment\Common\PayException;
 use Payment\Common\Weixin\Data\WxBaseData;
 use Payment\Common\WxConfig;
+use Payment\Utils\Client;
 use Payment\Utils\Curl;
 use Payment\Utils\DataParser;
 use Payment\Utils\StrUtil;
@@ -32,13 +33,13 @@ class WechatHelper extends WxBaseData
 
         $url = self::SANDBOX_URL;
 
-        $client = new Client([
+        $client = new Client(array(
             'timeout' => '10.0'
-        ]);
-        $options = [
+        ));
+        $options = array(
             'body' => $xml,
             'http_errors' => false
-        ];
+        );
 
         $response = $client->request('POST', self::SANDBOX_URL, $options);
 
@@ -59,10 +60,10 @@ class WechatHelper extends WxBaseData
      */
     protected function buildData()
     {
-        $this->retData = [
+        $this->retData = array(
             'mch_id'    => $this->mchId,
             'nonce_str' => StrUtil::getNonceStr(),
-        ];
+        );
     }
 
     protected function checkDataParam()

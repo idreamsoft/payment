@@ -1,7 +1,7 @@
 <?php
 namespace Payment\Common\Ali;
 
-use GuzzleHttp\Client;
+//use GuzzleHttp\Client;
 use InvalidArgumentException;
 use Payment\Common\AliConfig;
 use Payment\Common\BaseData;
@@ -83,7 +83,7 @@ abstract class AliBaseStrategy implements BaseStrategy
     protected function retData(array $data)
     {
         $sign = $data['sign'];
-        $data = ArrayUtil::removeKeys($data, ['sign']);
+        $data = ArrayUtil::removeKeys($data, array('sign'));
 
         $data = ArrayUtil::arraySort($data);
 
@@ -106,22 +106,22 @@ abstract class AliBaseStrategy implements BaseStrategy
      */
     protected function sendReq(array $data, $method = 'GET')
     {
-        $client = new Client([
+        $client = new Client(array(
             'base_uri' => $this->config->getewayUrl,
             'timeout' => '10.0'
-        ]);
+        ));
         $method = strtoupper($method);
-        $options = [];
+        $options = array();
         if ($method === 'GET') {
-            $options = [
+            $options = array(
                 'query' => $data,
                 'http_errors' => false
-            ];
+            );
         } elseif ($method === 'POST') {
-            $options = [
+            $options = array(
                 'form_params' => $data,
                 'http_errors' => false
-            ];
+            );
         }
         // 发起网络请求
         $response = $client->request($method, '', $options);
@@ -132,7 +132,7 @@ abstract class AliBaseStrategy implements BaseStrategy
 
         $body = $response->getBody()->getContents();
         try {
-            $body = \GuzzleHttp\json_decode($body, true);
+            $body = \json_decode($body, true);
         } catch (InvalidArgumentException $e) {
             throw new PayException('返回数据 json 解析失败');
         }
@@ -161,7 +161,7 @@ abstract class AliBaseStrategy implements BaseStrategy
      */
     protected function verifySign(array $data, $sign)
     {
-        $preStr = \GuzzleHttp\json_encode($data, JSON_UNESCAPED_UNICODE);// 主要是为了解决中文问题
+        $preStr = \json_encode($data, JSON_UNESCAPED_UNICODE);// 主要是为了解决中文问题
 
         if ($this->config->signType === 'RSA') {// 使用RSA
             $rsa = new RsaEncrypt($this->config->rsaAliPubKey);

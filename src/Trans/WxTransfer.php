@@ -17,7 +17,8 @@ class WxTransfer extends WxBaseStrategy
 
     public function getBuildDataClass()
     {
-        return TransferData::class;
+        // return TransferData::class;
+        return 'Payment\Common\Weixin\Data\TransferData';
     }
 
     /**
@@ -34,20 +35,20 @@ class WxTransfer extends WxBaseStrategy
 
         // 请求失败，可能是网络
         if ($ret['return_code'] != 'SUCCESS') {
-            return $retData = [
+            return $retData = array(
                 'is_success'    => 'F',
                 'error' => $ret['return_msg'],
                 'channel'   => Config::WX_TRANSFER,
-            ];
+            );
         }
 
         // 业务失败
         if ($ret['result_code'] != 'SUCCESS') {
-            return $retData = [
+            return $retData = array(
                 'is_success'    => 'F',
                 'error' => $ret['err_code_des'],
                 'channel'   => Config::WX_TRANSFER,
-            ];
+            );
         }
 
         return $this->createBackData($ret);
@@ -60,16 +61,15 @@ class WxTransfer extends WxBaseStrategy
      */
     protected function createBackData(array $data)
     {
-        $retData = [
+        $retData = array(
             'is_success'    => 'T',
-            'response'  => [
-                'trans_no'   => $data['partner_trade_no'],
+            'response'  => array(                 'trans_no'   => $data['partner_trade_no'],
                 'transaction_id'  => $data['payment_no'],
                 'pay_date' => $data['payment_time'],// 企业付款成功时间  2015-05-19 15:26:59
                 'device_info' => $data['device_info'],
                 'channel'   => Config::WX_TRANSFER,
-            ],
-        ];
+            ),
+        );
 
         return $retData;
     }

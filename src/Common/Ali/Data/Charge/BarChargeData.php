@@ -26,7 +26,7 @@ class BarChargeData extends ChargeBaseData
      */
     protected function getBizContent()
     {
-        $content = [
+        $content = array(
             'out_trade_no'  => strval($this->order_no),
             'scene' => $this->scene,
             'auth_code' => $this->auth_code,
@@ -47,7 +47,7 @@ class BarChargeData extends ChargeBaseData
             'operator_id' => $this->operator_id,
             'store_id' => $this->store_id,
             'terminal_id' => $this->terminal_id,
-        ];
+        );
 
         $timeExpire = $this->timeout_express;
         if (! empty($timeExpire)) {
@@ -65,7 +65,7 @@ class BarChargeData extends ChargeBaseData
         $scene = $this->scene;
         $authCode = $this->auth_code;
 
-        if (empty($scene) || ! in_array($scene, ['bar_code', 'wave_code'])) {
+        if (empty($scene) || ! in_array($scene, array('bar_code', 'wave_code'))) {
             throw new PayException('支付场景 scene 必须设置 条码支付：bar_code 声波支付：wave_code');
         }
 

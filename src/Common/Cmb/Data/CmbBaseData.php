@@ -63,13 +63,13 @@ abstract class CmbBaseData extends BaseData
      */
     protected function buildData()
     {
-        $signData = [
+        $signData = array(
             // 公共参数
             'version'       => $this->version,
             'charset'       => $this->charset,
             'signType'      => $this->signType,
             'reqData'       => $this->getReqData(),
-        ];
+        );
 
         // 移除数组中的空值
         $this->retData = ArrayUtil::paraFilter($signData);

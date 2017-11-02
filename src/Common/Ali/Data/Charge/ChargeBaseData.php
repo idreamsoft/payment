@@ -65,7 +65,7 @@ abstract class ChargeBaseData extends AliBaseData
         // 检查商品类型
         if (empty($goodsType)) {// 默认为实物类商品
             $this->goods_type = 1;
-        } elseif (! in_array($goodsType, [0 ,1])) {
+        } elseif (! in_array($goodsType, array(0 ,1))) {
             throw new PayException('商品类型可取值为：0-虚拟类商品  1-实物类商品');
         }
 

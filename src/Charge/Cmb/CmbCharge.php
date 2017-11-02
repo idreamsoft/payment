@@ -24,6 +24,7 @@ class CmbCharge extends CmbBaseStrategy
             $this->config->getewayUrl = 'http://121.15.180.66:801/NetPayment/BaseHttp.dll?MB_EUserPay';
         }
 
-        return ChargeData::class;
+        // return ChargeData::class;
+        return 'Payment\Common\Cmb\Data\Charge\ChargeData';
     }
 }

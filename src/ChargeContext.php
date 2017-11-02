@@ -100,7 +100,7 @@ class ChargeContext
      * @param array $data
      *
      * ```php
-     * $payData = [
+     * $payData = array(
      *      "order_no" => createPayid(),
      *      "amount" => '0.01',// 单位为元 ,最小为0.01
      *      "client_ip" => '127.0.0.1',

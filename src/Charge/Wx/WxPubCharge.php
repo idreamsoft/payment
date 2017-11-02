@@ -17,7 +17,8 @@ class WxPubCharge extends WxBaseStrategy
     public function getBuildDataClass()
     {
         $this->config->tradeType = 'JSAPI';
-        return PubChargeData::class;
+        // return PubChargeData::class;
+        return 'Payment\Common\Weixin\Data\Charge\PubChargeData';
     }
 
     /**
@@ -27,7 +28,7 @@ class WxPubCharge extends WxBaseStrategy
      * @return string $data  包含以下键
      *
      * ```php
-     * $data = [
+     * $data = array(
      *  'appId' => '',   // 公众号id
      *  'package'   => '',  // 订单详情扩展字符串  统一下单接口返回的prepay_id参数值，提交格式如：prepay_id=***
      *  'nonceStr'  => '',   // 随机字符串

@@ -18,7 +18,7 @@ class ArrayUtil
      */
     public static function paraFilter($para)
     {
-        $paraFilter = [];
+        $paraFilter = array();
         while (list($key, $val) = each($para)) {
             if ($val === '' || $val === null) {
                 continue;

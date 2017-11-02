@@ -8,7 +8,7 @@
  */
 
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../autoload.php';
 
 use Payment\Common\PayException;
 use Payment\Client\Charge;
@@ -20,7 +20,7 @@ $wxConfig = require_once __DIR__ . '/../wxconfig.php';
 
 $orderNo = time() . rand(1000, 9999);
 // 订单信息
-$payData = [
+$payData = array(
     'body'    => 'test body',
     'subject'    => 'test subject',
     'order_no'    => $orderNo,
@@ -35,7 +35,7 @@ $payData = [
     'sub_appid' => '',//微信分配的子商户公众账号ID
     'sub_mch_id' => '',// 微信支付分配的子商户号
     'sub_openid' => '',// 用户在子商户appid下的唯一标识
-];
+);
 
 try {
     $ret = Charge::run(Config::WX_CHANNEL_PUB, $wxConfig, $payData);

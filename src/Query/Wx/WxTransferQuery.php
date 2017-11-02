@@ -18,7 +18,8 @@ class WxTransferQuery extends WxBaseStrategy
 
     public function getBuildDataClass()
     {
-        return TransferQueryData::class;
+        // return TransferQueryData::class;
+        return 'Payment\Common\Weixin\Data\Query\TransferQueryData';
     }
 
     /**
@@ -36,20 +37,20 @@ class WxTransferQuery extends WxBaseStrategy
 
         // 请求失败，可能是网络
         if ($data['return_code'] != 'SUCCESS') {
-            return $retData = [
+            return $retData = array(
                 'is_success'    => 'F',
                 'error' => $data['return_msg'],
                 'channel' => Config::WX_TRANSFER,
-            ];
+            );
         }
 
         // 业务失败
         if ($data['result_code'] != 'SUCCESS') {
-            return $retData = [
+            return $retData = array(
                 'is_success'    => 'F',
                 'error' => $data['err_code_des'],
                 'channel' => Config::WX_TRANSFER,
-            ];
+            );
         }
 
         // 正确
@@ -67,10 +68,9 @@ class WxTransferQuery extends WxBaseStrategy
         // 将金额处理为元
         $amount = bcdiv($data['payment_amount'], 100, 2);
 
-        $retData = [
+        $retData = array(
             'is_success'    => 'T',
-            'response'  => [
-                'trans_no'   => $data['partner_trade_no'],// 商户单号
+            'response'  => array(                 'trans_no'   => $data['partner_trade_no'],// 商户单号
                 'transaction_id'  => $data['detail_id'],// 付款单号
                 'status'  => strtolower($data['status']),// 转账状态
                 'reason'    => $data['reason'],// 失败原因
@@ -80,8 +80,8 @@ class WxTransferQuery extends WxBaseStrategy
                 'pay_date'   => $data['transfer_time'],
                 'desc'   => $data['desc'],// 付款描述
                 'channel' => Config::WX_TRANSFER,
-            ],
-        ];
+            ),
+        );
 
         return $retData;
     }

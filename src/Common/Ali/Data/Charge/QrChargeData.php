@@ -20,7 +20,7 @@ class QrChargeData extends ChargeBaseData
      */
     protected function getBizContent()
     {
-        $content = [
+        $content = array(
             'out_trade_no'  => strval($this->order_no),
             // TODO 卖家支付宝id
             // 'seller_id' => '',
@@ -36,7 +36,7 @@ class QrChargeData extends ChargeBaseData
             'operator_id' => $this->operator_id,
             'store_id' => $this->store_id,
             'terminal_id' => $this->terminal_id,
-        ];
+        );
 
         $timeExpire = $this->timeout_express;
         if (! empty($timeExpire)) {

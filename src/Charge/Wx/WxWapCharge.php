@@ -17,7 +17,8 @@ class WxWapCharge extends WxBaseStrategy
     public function getBuildDataClass()
     {
         $this->config->tradeType = 'MWEB';
-        return WapChargeData::class;
+        // return WapChargeData::class;
+        return 'Payment\Common\Weixin\Data\Charge\WapChargeData';
     }
 
     /**

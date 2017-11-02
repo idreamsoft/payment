@@ -23,7 +23,8 @@ class CmbChargeQuery extends CmbBaseStrategy
             $this->config->getewayUrl = 'http://121.15.180.66:801/NetPayment_dl/BaseHttp.dll?QuerySingleOrder';
         }
 
-        return ChargeQueryData::class;
+        // return ChargeQueryData::class;
+        return 'Payment\Common\Cmb\Data\Query\ChargeQueryData';
     }
 
     protected function retData(array $ret)
@@ -39,10 +40,9 @@ class CmbChargeQuery extends CmbBaseStrategy
         }
 
         // 正确情况
-        $retData = [
+        $retData = array(
             'is_success'    => 'T',
-            'response'  => [
-                'amount'   => $ret['orderAmount'],
+            'response'  => array(                 'amount'   => $ret['orderAmount'],
                 'channel'   => Config::CMB_CHARGE,
                 'order_no'   => $ret['orderNo'],
                 'trade_state'   => $this->getTradeStatus($ret['orderStatus']),
@@ -53,8 +53,8 @@ class CmbChargeQuery extends CmbBaseStrategy
                 'discount_fee' => $ret['discountAmount'],// 优惠金额,格式：xxxx.xx  无优惠时返回0.00
                 'card_type' => $ret['cardType'],// 卡类型,02：一卡通；03：信用卡；07：他行卡
                 'return_param' => $ret['merchantPara'],
-            ],
-        ];
+            ),
+        );
 
         return $retData;
     }

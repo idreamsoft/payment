@@ -7,7 +7,7 @@
  * Time: 上午11:31
  */
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../autoload.php';
 
 use Payment\Common\PayException;
 use Payment\Client\Charge;
@@ -18,7 +18,7 @@ $aliConfig = require_once __DIR__ . '/../aliconfig.php';
 
 // 订单信息
 $orderNo = time() . rand(1000, 9999);
-$payData = [
+$payData = array(
     'body'    => 'ali wap pay',
     'subject'    => '测试支付宝手机网站支付',
     'order_no'    => $orderNo,
@@ -29,7 +29,7 @@ $payData = [
     'goods_type' => '1',// 0—虚拟类商品，1—实物类商品
     'store_id' => '',
     'quit_url' => 'http://helei112g.github.io', // 收银台的返回按钮（用户打断支付操作时返回的地址,4.0.3版本新增）
-];
+);
 
 try {
     $url = Charge::run(Config::ALI_CHANNEL_WAP, $aliConfig, $payData);

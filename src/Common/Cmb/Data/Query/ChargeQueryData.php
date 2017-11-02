@@ -43,7 +43,7 @@ class ChargeQueryData extends CmbBaseData
 
     protected function getReqData()
     {
-        $reqData = [
+        $reqData = array(
             'dateTime' => $this->dateTime,
             'branchNo' => $this->branchNo,
             'merchantNo' => $this->merchantNo,
@@ -53,7 +53,7 @@ class ChargeQueryData extends CmbBaseData
             'date' => $this->date ? $this->date : '',
             'orderNo' => $this->out_trade_no ? $this->out_trade_no : '',
             'operatorNo' => $this->operator_no ? $this->operator_no : '',
-        ];
+        );
 
         // 这里不能进行过滤空值，招商的空值也要加入签名中
         return $reqData;

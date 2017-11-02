@@ -28,8 +28,8 @@ class AliWebCharge extends AliBaseStrategy
     {
         $this->config->method = $this->method;
         // 以下两种方式均可以
-        return WebChargeData::class;
-        //return 'Payment\Common\Ali\Data\Charge\WebChargeData';
+        // return WebChargeData::class;
+        return 'Payment\Common\Ali\Data\Charge\WebChargeData';
     }
 
     /**

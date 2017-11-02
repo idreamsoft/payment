@@ -7,7 +7,7 @@
  * Time: 下午3:48
  */
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../autoload.php';
 
 use Payment\Common\PayException;
 use Payment\Client\Query;
@@ -17,9 +17,9 @@ date_default_timezone_set('Asia/Shanghai');
 
 $wxConfig = require_once __DIR__ . '/../wxconfig.php';
 
-$data = [
+$data = array(
     'trans_no' => '1489852933',
-];
+);
 
 try {
     $ret = Query::run(Config::WX_CHARGE, $wxConfig, $data);

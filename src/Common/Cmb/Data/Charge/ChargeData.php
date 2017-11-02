@@ -60,7 +60,7 @@ class ChargeData extends CmbBaseData
      */
     protected function getReqData()
     {
-        $reqData = [
+        $reqData = array(
             'dateTime' => $this->dateTime,
             'branchNo' => $this->branchNo,
             'merchantNo' => $this->merchantNo,
@@ -86,7 +86,7 @@ class ChargeData extends CmbBaseData
             // 暂时先不支持下面方式
             'extendInfo' => '',
             'extendInfoEncrypType' => '',
-        ];
+        );
 
         // 这里不能进行过滤空值，招商的空值也要加入签名中
         return $reqData;

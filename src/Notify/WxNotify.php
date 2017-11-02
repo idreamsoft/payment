@@ -82,7 +82,7 @@ class WxNotify extends NotifyStrategy
     protected function verifySign(array $retData)
     {
         $retSign = $retData['sign'];
-        $values = ArrayUtil::removeKeys($retData, ['sign', 'sign_type']);
+        $values = ArrayUtil::removeKeys($retData, array('sign', 'sign_type'));
 
         $values = ArrayUtil::paraFilter($values);
 
@@ -123,7 +123,7 @@ class WxNotify extends NotifyStrategy
         $totalFee = bcdiv($data['total_fee'], 100, 2);
         $cashFee = bcdiv($data['cash_fee'], 100, 2);
 
-        $retData = [
+        $retData = array(
             'bank_type' => $data['bank_type'],
             'cash_fee' => $cashFee,
             'device_info' => $data['device_info'],
@@ -137,7 +137,7 @@ class WxNotify extends NotifyStrategy
             'transaction_id'   => $data['transaction_id'],
             'trade_state'   => strtolower($data['return_code']),
             'channel'   => Config::WX_CHARGE,
-        ];
+        );
 
         // 检查是否存在用户自定义参数
         if (isset($data['attach']) && ! empty($data['attach'])) {
@@ -157,16 +157,16 @@ class WxNotify extends NotifyStrategy
     protected function replyNotify($flag, $msg = 'OK')
     {
         // 默认为成功
-        $result = [
+        $result = array(
             'return_code'   => 'SUCCESS',
             'return_msg'    => 'OK',
-        ];
+        );
         if (! $flag) {
             // 失败
-            $result = [
+            $result = array(
                 'return_code'   => 'FAIL',
                 'return_msg'    => $msg,
-            ];
+            );
         }
 
         return DataParser::toXml($result);

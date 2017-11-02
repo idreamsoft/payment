@@ -15,12 +15,12 @@ class AppChargeData extends ChargeBaseData
     protected function buildData()
     {
         $info = $this->scene_info;
-        $sceneInfo = [];
+        $sceneInfo = array();
         if ($info && is_array($info)) {
             $sceneInfo['store_info'] = $info;
         }
 
-        $signData = [
+        $signData = array(
             'appid' => trim($this->appId),
             'mch_id'    => trim($this->mchId),
             'device_info'   => $this->terminal_id,
@@ -46,7 +46,7 @@ class AppChargeData extends ChargeBaseData
             // 服务商
             'sub_appid' => $this->sub_appid,
             'sub_mch_id' => $this->sub_mch_id,
-        ];
+        );
 
         // 移除数组中的空值
         $this->retData = ArrayUtil::paraFilter($signData);

@@ -29,7 +29,7 @@ class RefundQueryData extends WxBaseData
 
     protected function buildData()
     {
-        $this->retData = [
+        $this->retData = array(
             'appid' => $this->appId,
             'mch_id'    => $this->mchId,
             'device_info' => $this->terminal_id,
@@ -44,7 +44,7 @@ class RefundQueryData extends WxBaseData
             // 服务商
             'sub_appid' => $this->sub_appid,
             'sub_mch_id' => $this->sub_mch_id,
-        ];
+        );
 
         $this->retData = ArrayUtil::paraFilter($this->retData);
     }

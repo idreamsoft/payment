@@ -20,6 +20,7 @@ class BindCardHelper extends CmbBaseStrategy
             $this->config->getewayUrl = 'http://121.15.180.66:801/mobilehtml/DebitCard/M_NetPay/OneNetRegister/NP_BindCard.aspx';
         }
 
-        return BindCardData::class;
+        // return BindCardData::class;
+        return 'Payment\Common\Cmb\Data\BindCardData';
     }
 }

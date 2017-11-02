@@ -57,7 +57,7 @@ class RefundQueryData extends CmbBaseData
 
     protected function getReqData()
     {
-        $reqData = [
+        $reqData = array(
             'dateTime' => $this->dateTime,
             'branchNo' => $this->branchNo,
             'merchantNo' => $this->merchantNo,
@@ -66,7 +66,7 @@ class RefundQueryData extends CmbBaseData
             'date' => $this->date,
             'merchantSerialNo' => $this->refund_no ? $this->refund_no : '',
             'bankSerialNo' => $this->refund_id ? $this->refund_id : '',
-        ];
+        );
 
         // 这里不能进行过滤空值，招商的空值也要加入签名中
         return $reqData;

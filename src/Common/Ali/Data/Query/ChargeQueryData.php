@@ -25,10 +25,10 @@ class ChargeQueryData extends AliBaseData
      */
     protected function getBizContent()
     {
-        $content = [
+        $content = array(
             'out_trade_no'    => $this->out_trade_no,
             'trade_no'        => $this->trade_no,
-        ];
+        );
 
         return $content;
     }

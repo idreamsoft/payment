@@ -19,7 +19,8 @@ class AliTransferQuery extends AliBaseStrategy
     public function getBuildDataClass()
     {
         $this->config->method = $this->method;
-        return TransferQueryData::class;
+        // return TransferQueryData::class;
+        return 'Payment\Common\Ali\Data\Query\TransferQueryData';
     }
 
     protected function retData(array $data)
@@ -49,25 +50,24 @@ class AliTransferQuery extends AliBaseStrategy
     protected function createBackData(array $data)
     {
         if ($data['code'] !== '10000') {
-            return $retData = [
+            return $retData = array(
                 'is_success'    => 'F',
                 'error' => $data['sub_msg'],
                 'channel'   => Config::ALI_TRANSFER,
-            ];
+            );
         }
 
-        $retData = [
+        $retData = array(
             'is_success'    => 'T',
-            'response'  => [
-                'transaction_id'   => ArrayUtil::get($data, 'order_id'),// 支付宝订单号
+            'response'  => array(                 'transaction_id'   => ArrayUtil::get($data, 'order_id'),// 支付宝订单号
                 'status'   => strtolower(ArrayUtil::get($data, 'status')),
                 'pay_date' => ArrayUtil::get($data, 'pay_date'),// 转账日期
                 'arrival_time_end' => ArrayUtil::get($data, 'arrival_time_end'),// 预计到账时间，转账到银行卡专用，格式为yyyy-MM-dd HH:mm:ss
                 'amount'   => ArrayUtil::get($data, 'order_fee'),// 转账金额
                 'trans_no'   => ArrayUtil::get($data, 'out_biz_no'),// 商户转账订单号
                 'channel'   => Config::ALI_TRANSFER,
-            ]
-        ];
+            )
+        );
         if (isset($data['error_code'])) {
             $retData['response']['error_code'] = ArrayUtil::get($data, 'error_code');
             // 查询到的订单状态为FAIL失败或REFUND退票时，返回具体的原因。

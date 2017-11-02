@@ -2,7 +2,7 @@
 
 namespace Payment\Common\Cmb;
 
-use GuzzleHttp\Client;
+//use GuzzleHttp\Client;
 use Payment\Common\BaseData;
 use Payment\Common\BaseStrategy;
 use Payment\Common\CmbConfig;
@@ -76,11 +76,11 @@ abstract class CmbBaseStrategy implements BaseStrategy
     {
         $json = json_encode($ret, JSON_UNESCAPED_UNICODE);
 
-        $reqData = [
+        $reqData = array(
             'url' => $this->config->getewayUrl,
             'name' => CmbConfig::REQ_FILED_NAME,
             'value' => $json,
-        ];
+        );
         return $reqData;
     }
 
@@ -93,14 +93,14 @@ abstract class CmbBaseStrategy implements BaseStrategy
      */
     protected function sendReq($json)
     {
-        $client = new Client([
+        $client = new Client(array(
             'timeout' => '10.0'
-        ]);
+        ));
         // @note: 微信部分接口并不需要证书支持。这里为了统一，全部携带证书进行请求
-        $options = [
+        $options = array(
             'body' => $json,
             'http_errors' => false
-        ];
+        );
         $response = $client->request('POST', $this->config->getewayUrl, $options);
         if ($response->getStatusCode() != '200') {
             throw new PayException('网络发生错误，请稍后再试curl返回码：' . $response->getReasonPhrase());

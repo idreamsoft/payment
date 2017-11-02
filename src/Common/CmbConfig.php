@@ -124,7 +124,7 @@ class CmbConfig extends ConfigInterface
         }
 
         // 签名算法,固定为“SHA-256”
-        if (key_exists('sign_type', $config) && in_array($config['sign_type'], ['SHA-256'])) {
+        if (key_exists('sign_type', $config) && in_array($config['sign_type'], array('SHA-256'))) {
             $this->signType = $config['sign_type'];
         } else {
             $this->signType = 'SHA-256';

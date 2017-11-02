@@ -80,8 +80,7 @@ class QueryContext
      *
      * @param array $data
      *      // 二者设置一个即可
-     *      $data => [
-     *          'transaction_id'    => '原付款支付宝交易号',
+     *      $data => array(      *          'transaction_id'    => '原付款支付宝交易号',
      *          'order_no' => '商户订单号',
      *      ];
      *

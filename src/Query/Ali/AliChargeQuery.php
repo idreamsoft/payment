@@ -26,7 +26,8 @@ class AliChargeQuery extends AliBaseStrategy
     public function getBuildDataClass()
     {
         $this->config->method = $this->method;
-        return ChargeQueryData::class;
+        // return ChargeQueryData::class;
+        return 'Payment\Common\Ali\Data\Query\ChargeQueryData';
     }
 
     /**
@@ -63,18 +64,16 @@ class AliChargeQuery extends AliBaseStrategy
     {
         // 新版本
         if ($data['code'] !== '10000') {
-            return [
-                'is_success'    => 'F',
+            return array(                 'is_success'    => 'F',
                 'error' => $data['sub_msg'],
                 'channel'   => Config::ALI_CHARGE,
-            ];
+            );
         }
 
         // 正确情况
-        $retData = [
+        $retData = array(
             'is_success'    => 'T',
-            'response'  => [
-                'channel'   => Config::ALI_CHARGE,
+            'response'  => array(                 'channel'   => Config::ALI_CHARGE,
                 'transaction_id'   => $data['trade_no'],// 支付宝交易号
                 'order_no'   => $data['out_trade_no'],// 商家订单号
                 'logon_id'   => $data['buyer_logon_id'],// 买家支付宝账号
@@ -90,9 +89,9 @@ class AliChargeQuery extends AliBaseStrategy
                 'terminal_id' => ArrayUtil::get($data, 'terminal_id'),
                 'store_name' => ArrayUtil::get($data, 'store_name'),
                 'buyer_id'   => ArrayUtil::get($data, 'buyer_user_id'),
-                'fund_bill_list' => ArrayUtil::get($data, 'fund_bill_list', []),// 支付成功的各个渠道金额信息
-            ],
-        ];
+                'fund_bill_list' => ArrayUtil::get($data, 'fund_bill_list', array()),// 支付成功的各个渠道金额信息
+            ),
+        );
 
         return $retData;
     }

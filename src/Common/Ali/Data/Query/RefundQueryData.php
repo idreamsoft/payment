@@ -19,11 +19,11 @@ class RefundQueryData extends AliBaseData
 
     protected function getBizContent()
     {
-        $content = [
+        $content = array(
             'out_trade_no'    => $this->out_trade_no,
             'trade_no'        => $this->trade_no,
             'out_request_no'    => $this->refund_no,
-        ];
+        );
 
         return $content;
     }

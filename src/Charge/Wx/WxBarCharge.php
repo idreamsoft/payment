@@ -18,7 +18,8 @@ class WxBarCharge extends WxBaseStrategy
 
     public function getBuildDataClass()
     {
-        return BarChargeData::class;
+        // return BarChargeData::class;
+        return 'Payment\Common\Weixin\Data\Charge\BarChargeData';
     }
 
     /**

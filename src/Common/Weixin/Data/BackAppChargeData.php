@@ -21,14 +21,14 @@ class BackAppChargeData extends WxBaseData
 {
     protected function buildData()
     {
-        $this->retData = [
+        $this->retData = array(
             'appid' => $this->appId,
             'partnerid' => $this->mchId,
             'prepayid'  => $this->prepay_id,
             'package'   => 'Sign=WXPay',
             'noncestr'  => StrUtil::getNonceStr(),
             'timestamp' => time(),
-        ];
+        );
     }
 
     protected function checkDataParam()

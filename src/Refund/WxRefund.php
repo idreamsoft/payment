@@ -17,7 +17,8 @@ class WxRefund extends WxBaseStrategy
 
     public function getBuildDataClass()
     {
-        return RefundData::class;
+        // return RefundData::class;
+        return 'Payment\Common\Weixin\Data\RefundData';
     }
 
     /**
@@ -35,18 +36,18 @@ class WxRefund extends WxBaseStrategy
 
         // 请求失败，可能是网络
         if ($ret['return_code'] != 'SUCCESS') {
-            return $retData = [
+            return $retData = array(
                 'is_success'    => 'F',
                 'error' => $ret['return_msg']
-            ];
+            );
         }
 
         // 业务失败
         if ($ret['result_code'] != 'SUCCESS') {
-            return $retData = [
+            return $retData = array(
                 'is_success'    => 'F',
                 'error' => $ret['err_code_des']
-            ];
+            );
         }
 
         return $this->createBackData($ret);
@@ -65,10 +66,9 @@ class WxRefund extends WxBaseStrategy
         // 将订单退款金额处理为元
         $refund_fee = bcdiv($data['refund_fee'], 100, 2);
 
-        $retData = [
+        $retData = array(
             'is_success'    => 'T',
-            'response'  => [
-                'transaction_id'   => $data['transaction_id'],
+            'response'  => array(                 'transaction_id'   => $data['transaction_id'],
                 'order_no'  => $data['out_trade_no'],
                 'refund_no' => $data['out_refund_no'],
                 'refund_id' => $data['refund_id'],
@@ -81,8 +81,8 @@ class WxRefund extends WxBaseStrategy
                 'coupon_refund_count' => $data['coupon_refund_count'],
                 'cash_fee' => bcdiv($data['cash_fee'], 100, 2),
                 'cash_refund_fee' => bcdiv($data['cash_refund_fee'], 100, 2),
-            ],
-        ];
+            ),
+        );
 
         return $retData;
     }

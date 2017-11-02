@@ -19,8 +19,11 @@
  * 登录密码    111111
  * 支付密码    111111
  */
+header('Content-Type: text/html; charset=UTF-8');
+ini_set('display_errors','ON');
+error_reporting(E_ALL & ~E_NOTICE);
 
-return [
+return array(
     'use_sandbox'               => true,// 是否使用沙盒模式
 
     'app_id'                    => '2016073100130857',
@@ -57,19 +60,18 @@ lj0S/flDaSEulGclDmvYinoGwX+aAyLy0VQIlUqj5wKBgHEUEf7YDnvw/IBnF1E4
 di70YoMynX3gjK3LTXhzISheZgcNRKTqiJgVunPokJxQRyYcAfaQeuIm9O8cCPE1
 rZpNAzCdd4NSj83UZRm3YOmC',
 
-    'limit_pay'                 => [
-        //'balance',// 余额
+    'limit_pay'                 => array(         //'balance',// 余额
         //'moneyFund',// 余额宝
         //'debitCardExpress',// 	借记卡快捷
         //'creditCard',//信用卡
         //'creditCardExpress',// 信用卡快捷
         //'creditCardCartoon',//信用卡卡通
         //'credit_group',// 信用支付类型（包含信用卡卡通、信用卡快捷、花呗、花呗分期）
-    ],// 用户不可用指定渠道支付当有多个渠道时用“,”分隔
+    ),// 用户不可用指定渠道支付当有多个渠道时用“,”分隔
 
     // 与业务相关参数
     'notify_url'                => 'https://helei112g.github.io/v1/notify/ali',
     'return_url'                => 'https://helei112g.github.io/',
 
     'return_raw'                => false,// 在处理回调时，是否直接返回原始数据，默认为 true
-];
+);

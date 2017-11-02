@@ -23,7 +23,8 @@ class AliRefund extends AliBaseStrategy
     public function getBuildDataClass()
     {
         $this->config->method = $this->method;
-        return RefundData::class;
+        // return RefundData::class;
+        return 'Payment\Common\Ali\Data\RefundData';
     }
 
     /**
@@ -41,7 +42,7 @@ class AliRefund extends AliBaseStrategy
         } catch (PayException $e) {
             throw $e;
         }
-        $content = \GuzzleHttp\json_decode($data['biz_content'], true);
+        $content = \json_decode($data['biz_content'], true);
         $refundNo = $content['out_request_no'];
 
         if ($this->config->returnRaw) {
@@ -51,17 +52,15 @@ class AliRefund extends AliBaseStrategy
         }
 
         if ($ret['code'] !== '10000') {
-            return [
-                'is_success'    => 'F',
+            return array(                 'is_success'    => 'F',
                 'error' => $ret['sub_msg'],
                 'refund_no' => $refundNo
-            ];
+            );
         }
 
-        $retData = [
+        $retData = array(
             'is_success'    => 'T',
-            'response'  => [
-                'transaction_id'   => $ret['trade_no'],
+            'response'  => array(                 'transaction_id'   => $ret['trade_no'],
                 'order_no'  => $ret['out_trade_no'],
                 'logon_id'   => $ret['buyer_logon_id'],
                 'fund_change' => $ret['fund_change'],// 本次退款是否发生了资金变化
@@ -72,8 +71,8 @@ class AliRefund extends AliBaseStrategy
                 'channel'   => Config::ALI_REFUND,
                 'buyer_id'   => $ret['buyer_user_id'],
                 'store_name' => ArrayUtil::get($ret, 'store_name'),
-            ],
-        ];
+            ),
+        );
 
         return $retData;
     }

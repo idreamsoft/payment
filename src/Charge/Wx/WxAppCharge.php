@@ -17,7 +17,8 @@ class WxAppCharge extends WxBaseStrategy
     public function getBuildDataClass()
     {
         $this->config->tradeType = 'APP';
-        return AppChargeData::class;
+        // return AppChargeData::class;
+        return 'Payment\Common\Weixin\Data\Charge\AppChargeData';
     }
 
     /**
@@ -27,7 +28,7 @@ class WxAppCharge extends WxBaseStrategy
      * @return array $data
      *
      * ```php
-     * $data = [
+     * $data = array(
      *  'appid' => '',   // 应用ID
      *  'partnerid' => '',   // 商户号
      *  'prepayid'  => '',   // 预支付交易会话ID

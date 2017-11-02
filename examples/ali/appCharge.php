@@ -7,7 +7,7 @@
  * Time: 下午5:38
  */
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../autoload.php';
 
 use Payment\Common\PayException;
 use Payment\Client\Charge;
@@ -18,7 +18,7 @@ $aliConfig = require_once __DIR__ . '/../aliconfig.php';
 
 // 订单信息
 $orderNo = time() . rand(1000, 9999);
-$payData = [
+$payData = array(
     'body'    => 'ali qr pay',
     'subject'    => '测试支付宝扫码支付',
     'order_no'    => $orderNo,
@@ -28,7 +28,7 @@ $payData = [
     // 'client_ip' => isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1',// 客户地址
     'goods_type' => '1',// 0—虚拟类商品，1—实物类商品
     'store_id' => '',
-];
+);
 
 try {
     $str = Charge::run(Config::ALI_CHANNEL_APP, $aliConfig, $payData);

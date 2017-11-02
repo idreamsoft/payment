@@ -48,7 +48,7 @@ class RefundData extends AliBaseData
      */
     protected function getBizContent()
     {
-        $content = [
+        $content = array(
             'out_trade_no'    => $this->out_trade_no,
             'trade_no'        => $this->trade_no,
             'refund_amount'     => $this->refund_fee,
@@ -57,7 +57,7 @@ class RefundData extends AliBaseData
             'operator_id'       => $this->operator_id,
             'store_id'          => $this->store_id,
             'terminal_id'       => $this->terminal_id,
-        ];
+        );
 
         return $content;
     }

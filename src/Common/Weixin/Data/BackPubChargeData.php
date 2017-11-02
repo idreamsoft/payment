@@ -22,13 +22,13 @@ class BackPubChargeData extends WxBaseData
 {
     protected function buildData()
     {
-        $this->retData = [
+        $this->retData = array(
             'appId' => $this->appId,
             'timeStamp' => time() . '',
             'nonceStr'  => $this->nonceStr,
             'package'   => 'prepay_id=' . $this->prepay_id,
             'signType'  => 'MD5',// 签名算法，暂支持MD5
-        ];
+        );
     }
 
     protected function checkDataParam()

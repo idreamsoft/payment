@@ -18,10 +18,10 @@ class TransferQueryData extends AliBaseData
 
     protected function getBizContent()
     {
-        $content = [
+        $content = array(
             'out_biz_no'    => $this->trans_no,
             'order_id'        => $this->transaction_id,
-        ];
+        );
 
         return $content;
     }

@@ -23,7 +23,8 @@ class CmbRefundQuery extends CmbBaseStrategy
             $this->config->getewayUrl = 'http://121.15.180.66:801/netpayment_dl/BaseHttp.dll?QuerySettledRefund';
         }
 
-        return RefundQueryData::class;
+        // return RefundQueryData::class;
+        return 'Payment\Common\Cmb\Data\Query\RefundQueryData';
     }
 
     protected function retData(array $ret)
@@ -52,13 +53,12 @@ class CmbRefundQuery extends CmbBaseStrategy
         }
 
         // 正确情况
-        $retData = [
+        $retData = array(
             'is_success'    => 'T',
-            'response'  => [
-                'channel' => Config::CMB_REFUND,
+            'response'  => array(                 'channel' => Config::CMB_REFUND,
                 'refund_data' => $list,
-            ],
-        ];
+            ),
+        );
 
         return $retData;
     }

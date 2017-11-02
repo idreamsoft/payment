@@ -76,14 +76,14 @@ class StrUtil
         $keyStr = str_replace(PHP_EOL, '', $keyStr);
         // 为了解决用户传入的密钥格式，这里进行统一处理
         if ($type === 'private') {
-            $beginStr = ['-----BEGIN RSA PRIVATE KEY-----', '-----BEGIN PRIVATE KEY-----'];
-            $endStr = ['-----END RSA PRIVATE KEY-----', '-----END PRIVATE KEY-----'];
+            $beginStr = array('-----BEGIN RSA PRIVATE KEY-----', '-----BEGIN PRIVATE KEY-----');
+            $endStr = array('-----END RSA PRIVATE KEY-----', '-----END PRIVATE KEY-----');
         } else {
-            $beginStr = ['-----BEGIN PUBLIC KEY-----', ''];
-            $endStr = ['-----END PUBLIC KEY-----', ''];
+            $beginStr = array('-----BEGIN PUBLIC KEY-----', '');
+            $endStr = array('-----END PUBLIC KEY-----', '');
         }
-        $keyStr = str_replace($beginStr, ['', ''], $keyStr);
-        $keyStr = str_replace($endStr, ['', ''], $keyStr);
+        $keyStr = str_replace($beginStr, array('', ''), $keyStr);
+        $keyStr = str_replace($endStr, array('', ''), $keyStr);
 
         $rsaKey = $beginStr[0] . PHP_EOL . wordwrap($keyStr, 64, PHP_EOL, true) . PHP_EOL . $endStr[0];
 

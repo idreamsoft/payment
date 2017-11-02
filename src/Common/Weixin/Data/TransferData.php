@@ -34,7 +34,7 @@ class TransferData extends WxBaseData
 {
     protected function buildData()
     {
-        $this->retData = [
+        $this->retData = array(
             'mch_appid' => $this->appId,
             'mchid'    => $this->mchId,
             'device_info' => $this->terminal_id,
@@ -49,7 +49,7 @@ class TransferData extends WxBaseData
 
             // $_SERVER["REMOTE_ADDR"]  获取客户端接口。此处获取php所在机器的ip  如果无法获取，则使用该ip
             'spbill_create_ip'  => $this->client_ip,
-        ];
+        );
 
         $this->retData = ArrayUtil::paraFilter($this->retData);
     }

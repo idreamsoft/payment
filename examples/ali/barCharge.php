@@ -7,7 +7,7 @@
  * Time: 下午4:32
  */
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../autoload.php';
 
 use Payment\Common\PayException;
 use Payment\Client\Charge;
@@ -18,7 +18,7 @@ $aliConfig = require_once __DIR__ . '/../aliconfig.php';
 
 // 订单信息
 $orderNo = time() . rand(1000, 9999);
-$payData = [
+$payData = array(
     'body'    => 'ali bar pay',
     'subject'    => '测试支付宝条码支付',
     'order_no'    => $orderNo,
@@ -33,7 +33,7 @@ $payData = [
     'terminal_id' => '',// 终端设备号(门店号或收银设备ID) 默认值 web
     'scene' => 'bar_code',// 条码支付：bar_code 声波支付：wave_code
     'auth_code' => '12312313123',
-];
+);
 
 try {
     $ret = Charge::run(Config::ALI_CHANNEL_BAR, $aliConfig, $payData);

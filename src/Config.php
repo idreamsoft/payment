@@ -1,5 +1,6 @@
 <?php
 namespace Payment;
+defined('JSON_UNESCAPED_UNICODE') OR define('JSON_UNESCAPED_UNICODE',0);
 
 /**
  * @author: helei

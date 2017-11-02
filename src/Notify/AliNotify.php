@@ -86,7 +86,7 @@ class AliNotify extends NotifyStrategy
             return $data;
         }
 
-        $retData = [
+        $retData = array(
             'notify_time'   => ArrayUtil::get($data, 'notify_time'),
             'notify_type' => ArrayUtil::get($data, 'notify_type'),
             'notify_id' => ArrayUtil::get($data, 'notify_id'),
@@ -112,7 +112,7 @@ class AliNotify extends NotifyStrategy
             'trade_refund_time' => ArrayUtil::get($data, 'gmt_refund'), // 交易退款时间
             'trade_close_time' => ArrayUtil::get($data, 'gmt_close'), // 交易关闭时间
             'channel'   => Config::ALI_CHARGE,
-        ];
+        );
 
         // 检查是否存在用户自定义参数
         if (isset($data['passback_params']) && ! empty($data['passback_params'])) {
@@ -120,11 +120,11 @@ class AliNotify extends NotifyStrategy
         }
         // 支付成功的各个渠道金额信息
         if (isset($data['fund_bill_list']) && ! empty($data['fund_bill_list'])) {
-            $retData['fund_bill_list'] = \GuzzleHttp\json_decode($data['fund_bill_list'], true);
+            $retData['fund_bill_list'] = \json_decode($data['fund_bill_list'], true);
         }
         // 优惠券信息
         if (isset($data['voucher_detail_list']) && ! empty($data['voucher_detail_list'])) {
-            $retData['voucher_detail_list'] = \GuzzleHttp\json_decode($data['voucher_detail_list'], true);
+            $retData['voucher_detail_list'] = \json_decode($data['voucher_detail_list'], true);
         }
 
         return $retData;
@@ -154,7 +154,7 @@ class AliNotify extends NotifyStrategy
      */
     protected function getTradeStatus($status)
     {
-        if (in_array($status, ['TRADE_SUCCESS', 'TRADE_FINISHED'])) {
+        if (in_array($status, array('TRADE_SUCCESS', 'TRADE_FINISHED'))) {
             return Config::TRADE_STATUS_SUCC;
         } else {
             return Config::TRADE_STATUS_FAILD;
@@ -173,7 +173,7 @@ class AliNotify extends NotifyStrategy
         $sign = $data['sign'];
 
         // 1. 剔除sign与sign_type参数
-        $values = ArrayUtil::removeKeys($data, ['sign', 'sign_type']);
+        $values = ArrayUtil::removeKeys($data, array('sign', 'sign_type'));
         //  2. 移除数组中的空值
         $values = ArrayUtil::paraFilter($values);
         // 3. 对待签名参数数组排序

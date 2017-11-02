@@ -106,7 +106,7 @@ final class WxConfig extends ConfigInterface
         }
 
         // 设置支付的货币类型
-        if (key_exists('fee_type', $config) && in_array($config['fee_type'], ['CNY'])) {
+        if (key_exists('fee_type', $config) && in_array($config['fee_type'], array('CNY'))) {
             $this->feeType = $config['fee_type'];
         }
 
@@ -131,7 +131,7 @@ final class WxConfig extends ConfigInterface
             $this->appKeyPem = $config['app_key_pem'];
         }
 
-        if (key_exists('sign_type', $config) && in_array($config['sign_type'], ['MD5', 'HMAC-SHA256'])) {
+        if (key_exists('sign_type', $config) && in_array($config['sign_type'], array('MD5', 'HMAC-SHA256'))) {
             $this->signType = $config['sign_type'];
         } else {
             $this->signType = 'MD5';
@@ -144,7 +144,7 @@ final class WxConfig extends ConfigInterface
             $this->useSandbox = true;// 是沙箱模式  重新获取key
             $this->signType = 'MD5';// 沙箱模式只能使用 md5 。沙箱下，微信部分接口不支持 HMAC-SHA256
 
-            $helper = new WechatHelper($this, []);
+            $helper = new WechatHelper($this, array());
             $this->md5Key = $helper->getSandboxSignKey();
         } else {
             $this->useSandbox = false;// 不是沙箱模式

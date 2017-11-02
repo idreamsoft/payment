@@ -17,7 +17,7 @@ use Payment\Config;
  */
 class Charge
 {
-    private static $supportChannel = [
+    private static $supportChannel = array(
         Config::ALI_CHANNEL_APP,// 支付宝 APP 支付
         Config::ALI_CHANNEL_WAP, // 支付宝手机网页支付
         Config::ALI_CHANNEL_WEB, // 支付宝电脑网站支付
@@ -33,7 +33,7 @@ class Charge
 
         Config::CMB_CHANNEL_APP,// 招行一网通
         'applepay_upacp',// Apple Pay
-    ];
+    );
 
     /**
      * 支付实例
@@ -45,7 +45,7 @@ class Charge
     {
         /* 设置内部字符编码为 UTF-8 */
         mb_internal_encoding("UTF-8");
-        
+
         if (is_null(self::$instance)) {
             static::$instance = new ChargeContext();
         }

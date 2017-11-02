@@ -25,7 +25,7 @@ class WebChargeData extends ChargeBaseData
      */
     protected function getBizContent()
     {
-        $content = [
+        $content = array(
             'out_trade_no'  => strval($this->order_no),
             // 销售产品码，商家和支付宝签约的产品码，为固定值QUICK_WAP_PAY
             'product_code'  => 'FAST_INSTANT_TRADE_PAY',
@@ -43,7 +43,7 @@ class WebChargeData extends ChargeBaseData
             'qr_pay_mode'   => $this->qr_mod,
             // TODO 设置二维码宽度
             // 'qrcode_width' => '',// qr_pay_mode = 4时有效。设置二维码宽度
-        ];
+        );
 
         $timeExpire = $this->timeout_express;
         if (! empty($timeExpire)) {

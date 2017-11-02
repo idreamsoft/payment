@@ -22,21 +22,21 @@ class AliBarCharge extends AliBaseStrategy
     public function getBuildDataClass()
     {
         $this->config->method = $this->method;
-        return BarChargeData::class;
+        // return BarChargeData::class;
+        return 'Payment\Common\Ali\Data\Charge\BarChargeData';
     }
 
     /**
      * 处理扫码支付的返回值
      * @param array $ret
-     * $data = [
+     * $data = array(
             'code' => 10000,
             'msg' => 'Success',
             'buyer_logon_id' => 'day***@gmail.com',
             'buyer_pay_amount' => '0.01',
             'buyer_user_id' => '2088002162809334',
-            'fund_bill_list' => [
-            ['amount' => '0.01', 'fund_channel' => 'ALIPAYACCOUNT'],
-            ],
+            'fund_bill_list' => array(             array('amount' => '0.01', 'fund_channel' => 'ALIPAYACCOUNT'),
+            ),
             'gmt_payment' => '2017-03-05 22:27:46',
             'open_id' => '20880008025007264081318860117433',
             'out_trade_no' => '14887240631516',
@@ -44,7 +44,7 @@ class AliBarCharge extends AliBaseStrategy
             'receipt_amount' => '0.01',
             'total_amount' =>  '0.01',
             'trade_no' =>  '2017030521001004330274482163',
-        ];
+        );
      *
      * @throws PayException
      * @return string  可生产二维码的uri

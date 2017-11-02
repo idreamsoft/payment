@@ -74,7 +74,7 @@ abstract class AliBaseData extends BaseData
         $bizContent = $this->getBizContent();
         $bizContent = ArrayUtil::paraFilter($bizContent);// 过滤掉空值，下面不用在检查是否为空
 
-        $signData = [
+        $signData = array(
             // 公共参数
             'app_id'        => $this->appId,
             'method'        => $this->method,
@@ -87,10 +87,10 @@ abstract class AliBaseData extends BaseData
 
             // 业务参数
             'biz_content'   => json_encode($bizContent, JSON_UNESCAPED_UNICODE),
-        ];
+        );
 
         // 电脑支付  wap支付添加额外参数
-        if (in_array($this->method, ['alipay.trade.page.pay', 'alipay.trade.wap.pay'])) {
+        if (in_array($this->method, array('alipay.trade.page.pay', 'alipay.trade.wap.pay'))) {
             $signData['return_url'] = $this->returnUrl;
         }
 

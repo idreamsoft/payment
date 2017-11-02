@@ -17,7 +17,7 @@ use Payment\QueryContext;
  */
 class Query
 {
-    protected static $supportType = [
+    protected static $supportType = array(
         Config::ALI_CHARGE,
         Config::ALI_REFUND,
         Config::ALI_TRANSFER,
@@ -30,7 +30,7 @@ class Query
 
         Config::CMB_CHARGE,
         Config::CMB_REFUND,
-    ];
+    );
 
     /**
      * 查询实例

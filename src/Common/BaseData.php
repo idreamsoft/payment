@@ -106,7 +106,7 @@ abstract class BaseData
         } else {
             $data = $this->retData;
         }
-        $values = ArrayUtil::removeKeys($data, ['sign']);
+        $values = ArrayUtil::removeKeys($data, array('sign'));
 
         $values = ArrayUtil::arraySort($values);
 

@@ -40,7 +40,7 @@ class TransData extends AliBaseData
             throw new PayException('请传入 商户转账唯一订单号');
         }
 
-        if (empty($payeeType) || ! in_array($payeeType, ['ALIPAY_USERID', 'ALIPAY_LOGONID'])) {
+        if (empty($payeeType) || ! in_array($payeeType, array('ALIPAY_USERID', 'ALIPAY_LOGONID'))) {
             throw new PayException('请传入收款账户类型');
         }
 
@@ -64,7 +64,7 @@ class TransData extends AliBaseData
      */
     protected function getBizContent()
     {
-        $content = [
+        $content = array(
             'out_biz_no'    => $this->trans_no,// 商户转账唯一订单号
             'payee_type'        => strtoupper($this->payee_type),// 收款方账户类型
             'payee_account'     => $this->payee_account,// 收款方账户
@@ -73,7 +73,7 @@ class TransData extends AliBaseData
             'payer_real_name'    => $this->payer_real_name,
             'payee_real_name'          => $this->payee_real_name,
             'remark'       => $this->remark,
-        ];
+        );
 
         return $content;
     }

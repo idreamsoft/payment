@@ -7,7 +7,7 @@
  * Time: 上午11:50
  */
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../autoload.php';
 
 use Payment\Common\PayException;
 use Payment\Client\Charge;
@@ -18,7 +18,7 @@ $wxConfig = require_once __DIR__ . '/../wxconfig.php';
 
 $orderNo = time() . rand(1000, 9999);
 // 订单信息
-$payData = [
+$payData = array(
     'body'    => 'test body',
     'subject'    => 'test subject',
     'order_no'    => $orderNo,
@@ -26,7 +26,7 @@ $payData = [
     'amount'    => '3.01',// 微信沙箱模式，需要金额固定为3.01
     'return_param' => '123',
     'client_ip' => isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1',// 客户地址
-];
+);
 
 try {
     $ret = Charge::run(Config::WX_CHANNEL_APP, $wxConfig, $payData);

@@ -26,7 +26,7 @@ class ChargeQueryData extends WxBaseData
 
     protected function buildData()
     {
-        $this->retData = [
+        $this->retData = array(
             'appid' => $this->appId,
             'mch_id'    => $this->mchId,
             'nonce_str' => $this->nonceStr,
@@ -38,7 +38,7 @@ class ChargeQueryData extends WxBaseData
             // 服务商
             'sub_appid' => $this->sub_appid,
             'sub_mch_id' => $this->sub_mch_id,
-        ];
+        );
 
         $this->retData = ArrayUtil::paraFilter($this->retData);
     }

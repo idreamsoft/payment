@@ -89,7 +89,7 @@ class CmbNotify extends NotifyStrategy
             $data['channel'] = $channel;
             return $data;
         } elseif ($noticeType === CmbConfig::NOTICE_PAY) {
-            $retData = [
+            $retData = array(
                 'amount'   => $noticeData['amount'],
                 'channel'   => $channel,
                 'date' => $noticeData['date'],
@@ -102,9 +102,9 @@ class CmbNotify extends NotifyStrategy
                 'return_param' => $noticeData['merchantPara'],
                 'discount_flag' => $noticeData['discountFlag'],
                 'notice_no' => $noticeData['noticeSerialNo'],
-            ];
+            );
         } elseif ($noticeType === CmbConfig::NOTICE_SIGN) {
-            $retData = [
+            $retData = array(
                 'user_id' => $noticeData['userID'],
                 'no_pwd_pay' => $noticeData['noPwdPay'],
                 'notice_no' => $noticeData['noticeSerialNo'],
@@ -114,7 +114,7 @@ class CmbNotify extends NotifyStrategy
                 'user_pid_hash' => $noticeData['userPidHash'],
                 'user_pid_type' => $noticeData['userPidType'],
                 'channel'   => $channel,
-            ];
+            );
         } else {
             $retData = $noticeData;
         }

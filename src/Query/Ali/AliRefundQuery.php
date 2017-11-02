@@ -21,7 +21,8 @@ class AliRefundQuery extends AliBaseStrategy
     public function getBuildDataClass()
     {
         $this->config->method = $this->method;
-        return RefundQueryData::class;
+        // return RefundQueryData::class;
+        return 'Payment\Common\Ali\Data\Query\RefundQueryData';
     }
 
     protected function retData(array $data)
@@ -52,34 +53,32 @@ class AliRefundQuery extends AliBaseStrategy
     protected function createBackData(array $data)
     {
         if ($data['code'] !== '10000') {
-            return $retData = [
+            return $retData = array(
                 'is_success'    => 'F',
                 'error' => $data['sub_msg'],
                 'channel'   => Config::ALI_REFUND,
-            ];
+            );
         }
 
         // 这里有个诡异情况。查询数据全部为空。仅返回一个成功的标记
         if (empty($data['out_trade_no'])) {
-            return [
-                'is_success'    => 'T',
+            return array(                 'is_success'    => 'T',
                 'msg'   => strtolower($data['msg']),
                 'channel'   => Config::ALI_REFUND,
-            ];
+            );
         }
 
-        $retData = [
+        $retData = array(
             'is_success'    => 'T',
-            'response'  => [
-                'transaction_id'   => ArrayUtil::get($data, 'trade_no'),// 支付宝订单号
+            'response'  => array(                 'transaction_id'   => ArrayUtil::get($data, 'trade_no'),// 支付宝订单号
                 'order_no'   => ArrayUtil::get($data, 'out_trade_no'),// 商户订单号
                 'refund_no' => ArrayUtil::get($data, 'out_request_no'),// 本笔退款对应的退款请求号
                 'reason'   => ArrayUtil::get($data, 'refund_reason'),// 退款理由
                 'amount'   => ArrayUtil::get($data, 'total_amount'),// 订单总金额
                 'refund_amount'   => ArrayUtil::get($data, 'refund_amount'),// 退款金额
                 'channel'   => Config::ALI_REFUND,
-            ]
-        ];
+            )
+        );
 
         return $retData;
     }

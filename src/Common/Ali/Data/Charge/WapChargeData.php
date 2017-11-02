@@ -20,7 +20,7 @@ class WapChargeData extends ChargeBaseData
      */
     protected function getBizContent()
     {
-        $content = [
+        $content = array(
             'body'          => strval($this->body),
             'subject'       => strval($this->subject),
             'out_trade_no'  => strval($this->order_no),
@@ -37,7 +37,7 @@ class WapChargeData extends ChargeBaseData
             'store_id' => $this->store_id,
             // TODO 在收银台出现返回按钮
             'quit_url' => $this->quit_url,
-        ];
+        );
 
         $timeExpire = $this->timeout_express;
         if (! empty($timeExpire)) {

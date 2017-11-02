@@ -17,7 +17,7 @@ use Payment\RefundContext;
  */
 class Refund
 {
-    private static $supportChannel = [
+    private static $supportChannel = array(
         Config::ALI_REFUND,// 支付宝
 
         Config::WX_REFUND,// 微信
@@ -25,7 +25,7 @@ class Refund
         Config::CMB_REFUND,// 招行一网通
 
         'applepay_upacp',// Apple Pay
-    ];
+    );
 
     /**
      * 退款实例

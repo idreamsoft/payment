@@ -21,7 +21,8 @@ class CmbRefund extends CmbBaseStrategy
             $this->config->getewayUrl = 'http://121.15.180.66:801/NetPayment_dl/BaseHttp.dll?DoRefund';
         }
 
-        return RefundData::class;
+        // return RefundData::class;
+        return 'Payment\Common\Cmb\Data\RefundData';
     }
 
     protected function retData(array $ret)
@@ -38,10 +39,9 @@ class CmbRefund extends CmbBaseStrategy
         }
 
         // 正确情况
-        $retData = [
+        $retData = array(
             'is_success'    => 'T',
-            'response'  => [
-                'transaction_id'   => $rsqData['bankSerialNo'],// 银行的退款流水号
+            'response'  => array(                 'transaction_id'   => $rsqData['bankSerialNo'],// 银行的退款流水号
                 'order_no'  => $ret['reqData']['orderNo'],
                 'date' => $ret['reqData']['date'],
                 'refund_no' => trim($rsqData['refundSerialNo']),//退款流水号,商户生成
@@ -50,8 +50,8 @@ class CmbRefund extends CmbBaseStrategy
                 'refund_fee'    => $rsqData['amount'],
                 'channel'   => Config::CMB_REFUND,
                 'refund_time' => date('Y-m-d H:i:s', strtotime($rsqData['bankDate'] . $rsqData['bankTime'])),
-            ],
-        ];
+            ),
+        );
 
         return $retData;
     }

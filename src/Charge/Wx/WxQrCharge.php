@@ -16,7 +16,8 @@ class WxQrCharge extends WxBaseStrategy
     public function getBuildDataClass()
     {
         $this->config->tradeType = 'NATIVE';// 微信文档这里写错了
-        return QrChargeData::class;
+        // return QrChargeData::class;
+        return 'Payment\Common\Weixin\Data\Charge\QrChargeData';
     }
 
     /**

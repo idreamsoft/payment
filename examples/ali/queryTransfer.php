@@ -7,7 +7,7 @@
  * Time: 下午6:00
  */
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../autoload.php';
 
 use Payment\Common\PayException;
 use Payment\Client\Query;
@@ -17,10 +17,10 @@ date_default_timezone_set('Asia/Shanghai');
 $aliConfig = require_once __DIR__ . '/../aliconfig.php';
 
 // 以下参数二选一
-$data = [
+$data = array(
     'trans_no' => '15043431341',
     'transaction_id' => '201709021100700015026800000163021',
-];
+);
 
 try {
     $ret = Query::run(Config::ALI_TRANSFER, $aliConfig, $data);

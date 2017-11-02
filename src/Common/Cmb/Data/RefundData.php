@@ -62,7 +62,7 @@ class RefundData extends CmbBaseData
     {
         $rc4 = new Rc4Encrypt($this->merKey);
 
-        $reqData = [
+        $reqData = array(
             'dateTime' => $this->dateTime,
             'branchNo' => $this->branchNo,
             'merchantNo' => $this->merchantNo,
@@ -74,7 +74,7 @@ class RefundData extends CmbBaseData
             'operatorNo' => $this->operator_id,
             'encrypType' => 'RC4',// 这里不让用户控制，直接采用 rc4加密
             'pwd' => $rc4->encrypt($this->opPwd),
-        ];
+        );
 
         // 这里不能进行过滤空值，招商的空值也要加入签名中
         return $reqData;

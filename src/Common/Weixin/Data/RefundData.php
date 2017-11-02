@@ -30,7 +30,7 @@ class RefundData extends WxBaseData
 {
     protected function buildData()
     {
-        $this->retData = [
+        $this->retData = array(
             'appid' => $this->appId,
             'mch_id'    => $this->mchId,
             'device_info' => $this->terminal_id,
@@ -47,7 +47,7 @@ class RefundData extends WxBaseData
             // 服务商
             'sub_appid' => $this->sub_appid,
             'sub_mch_id' => $this->sub_mch_id,
-        ];
+        );
 
         $this->retData = ArrayUtil::paraFilter($this->retData);
     }
@@ -82,7 +82,7 @@ class RefundData extends WxBaseData
             throw new PayException('退款金额不能大于订单总金额');
         }
 
-        if (! in_array($refundAccount, [WxConfig::REFUND_RECHARGE, WxConfig::REFUND_UNSETTLED])) {
+        if (! in_array($refundAccount, array(WxConfig::REFUND_RECHARGE, WxConfig::REFUND_UNSETTLED))) {
             $this->refund_account = WxConfig::REFUND_UNSETTLED;
         }
 

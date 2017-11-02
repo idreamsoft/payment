@@ -34,7 +34,7 @@ class BindCardData extends CmbBaseData
 
     protected function getReqData()
     {
-        $reqData = [
+        $reqData = array(
             'dateTime' => $this->dateTime,
             'merchantSerialNo' => $this->serial_no ? $this->serial_no : '',
             'agrNo' => $this->agr_no,
@@ -48,7 +48,7 @@ class BindCardData extends CmbBaseData
             'noticeUrl' => $this->signNoticeUrl ? $this->signNoticeUrl : '',
             'noticePara' => $this->return_param ? $this->return_param : '',
             'returnUrl' => $this->returnUrl ? $this->returnUrl : '',
-        ];
+        );
 
         // 这里不能进行过滤空值，招商的空值也要加入签名中
         return $reqData;

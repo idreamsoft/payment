@@ -22,7 +22,8 @@ class AliQrCharge extends AliBaseStrategy
     public function getBuildDataClass()
     {
         $this->config->method = $this->method;
-        return QrChargeData::class;
+        // return QrChargeData::class;
+        return 'Payment\Common\Ali\Data\Charge\QrChargeData';
     }
 
     /**

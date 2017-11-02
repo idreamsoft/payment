@@ -19,7 +19,8 @@ class WxRefundQuery extends WxBaseStrategy
 
     public function getBuildDataClass()
     {
-        return RefundQueryData::class;
+        // return RefundQueryData::class;
+        return 'Payment\Common\Weixin\Data\Query\RefundQueryData';
     }
 
     /**
@@ -37,20 +38,20 @@ class WxRefundQuery extends WxBaseStrategy
 
         // 请求失败，可能是网络
         if ($data['return_code'] != 'SUCCESS') {
-            return $retData = [
+            return $retData = array(
                 'is_success'    => 'F',
                 'error' => $data['return_msg'],
                 'channel' => Config::WX_REFUND,
-            ];
+            );
         }
 
         // 业务失败
         if ($data['result_code'] != 'SUCCESS') {
-            return $retData = [
+            return $retData = array(
                 'is_success'    => 'F',
                 'error' => $data['err_code_des'],
                 'channel' => Config::WX_REFUND,
-            ];
+            );
         }
 
         // 正确
@@ -72,7 +73,7 @@ class WxRefundQuery extends WxBaseStrategy
         $refundFee = bcdiv($data['refund_fee'], 100, 2);
 
         // 获取退款笔数
-        $refundData = [];
+        $refundData = array();
         for ($i = 0; $i<$refund_count; $i++) {
             $refund_no = 'out_refund_no_' . $i;// 商户退款单号
             $refund_id = 'refund_id_' . $i;// 微信退款单号
@@ -85,7 +86,7 @@ class WxRefundQuery extends WxBaseStrategy
             $fee = bcdiv($refund_fee, 100, 2);
 
             // 一笔订单可能被分为多笔,进行退款
-            $refundData[] = [
+            $refundData[] = array(
                 'refund_no' => $data[$refund_no],
                 'refund_id' => $data[$refund_id],
                 'refund_channel'    => $data[$refund_channel],
@@ -93,21 +94,20 @@ class WxRefundQuery extends WxBaseStrategy
                 //'settlement_refund_fee' => $data[$settlement_refund_fee],
                 'refund_status' => strtolower($data[$refund_status]),
                 'recv_accout'   => $data[$recv_accout],
-            ];
+            );
         }
 
-        $retData = [
+        $retData = array(
             'is_success'    => 'T',
-            'response'  => [
-                'amount'   => $totalFee,// 订单总金额
+            'response'  => array(                 'amount'   => $totalFee,// 订单总金额
                 'order_no'   => $data['out_trade_no'],// 商户订单号
                 'transaction_id'   => $data['transaction_id'],// 微信订单号
                 'refund_count' => $data['refund_count'],// 退款总笔数
                 'refund_fee' => $refundFee,// 退款总金额
                 'refund_data'   => $refundData,// 退款信息
                 'channel' => Config::WX_REFUND,
-            ],
-        ];
+            ),
+        );
 
         return $retData;
     }

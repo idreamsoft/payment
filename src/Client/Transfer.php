@@ -18,14 +18,14 @@ use Payment\TransferContext;
 class Transfer
 {
 
-    private static $supportChannel = [
+    private static $supportChannel = array(
         Config::ALI_TRANSFER,// 支付宝
 
         Config::WX_TRANSFER,// 微信
 
         'cmb_wallet',// 招行一网通
         'applepay_upacp',// Apple Pay
-    ];
+    );
 
     /**
      * 转账实例

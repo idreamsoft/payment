@@ -17,10 +17,10 @@ use Payment\HelperContext;
  */
 class Helper
 {
-    private static $supportChannel = [
+    private static $supportChannel = array(
         Config::CMB_BIND,// 招商绑卡操作
         Config::CMB_PUB_KEY,// 招商公钥查询操作
-    ];
+    );
 
     /**
      * 辅助类实例
@@ -54,7 +54,7 @@ class Helper
      * @return mixed
      * @throws PayException
      */
-    public static function run($channel, $config, array $metadata = [])
+    public static function run($channel, $config, array $metadata = array())
     {
         if (! in_array($channel, self::$supportChannel)) {
             throw new PayException('sdk当前不支持该渠道，当前仅支持：' . implode(',', self::$supportChannel));

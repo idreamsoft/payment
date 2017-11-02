@@ -18,14 +18,14 @@ use Payment\NotifyContext;
  */
 class Notify
 {
-    private static $supportChannel = [
+    private static $supportChannel = array(
         Config::ALI_CHARGE,// 支付宝
 
         Config::WX_CHARGE,// 微信
 
         Config::CMB_CHARGE,// 招行一网通
         'applepay_upacp',// Apple Pay
-    ];
+    );
 
     /**
      * 异步通知类
