@@ -73,7 +73,8 @@ class AliChargeQuery extends AliBaseStrategy
         // 正确情况
         $retData = array(
             'is_success'    => 'T',
-            'response'  => array(                 'channel'   => Config::ALI_CHARGE,
+            'response'  => array(
+	        'channel'   => Config::ALI_CHARGE,
                 'transaction_id'   => $data['trade_no'],// 支付宝交易号
                 'order_no'   => $data['out_trade_no'],// 商家订单号
                 'logon_id'   => $data['buyer_logon_id'],// 买家支付宝账号

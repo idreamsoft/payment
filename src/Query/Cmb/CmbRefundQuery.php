@@ -55,7 +55,8 @@ class CmbRefundQuery extends CmbBaseStrategy
         // 正确情况
         $retData = array(
             'is_success'    => 'T',
-            'response'  => array(                 'channel' => Config::CMB_REFUND,
+            'response'  => array(
+	        'channel' => Config::CMB_REFUND,
                 'refund_data' => $list,
             ),
         );

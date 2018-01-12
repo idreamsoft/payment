@@ -77,7 +77,8 @@ class WxChargeQuery extends WxBaseStrategy
 
         $retData = array(
             'is_success'    => 'T',
-            'response'  => array(                 'amount'   => $totalFee,
+            'response'  => array(
+	        'amount'   => $totalFee,
                 'channel'   => Config::WX_CHARGE,// 支付查询
                 'order_no'   => $data['out_trade_no'],
                 'buyer_id'   => $data['openid'],

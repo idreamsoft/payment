@@ -70,7 +70,8 @@ class WxTransferQuery extends WxBaseStrategy
 
         $retData = array(
             'is_success'    => 'T',
-            'response'  => array(                 'trans_no'   => $data['partner_trade_no'],// 商户单号
+            'response'  => array(
+	        'trans_no'   => $data['partner_trade_no'],// 商户单号
                 'transaction_id'  => $data['detail_id'],// 付款单号
                 'status'  => strtolower($data['status']),// 转账状态
                 'reason'    => $data['reason'],// 失败原因

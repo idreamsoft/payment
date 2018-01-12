@@ -13,7 +13,6 @@ use Payment\Config;
  */
 class PubKeyHelper extends CmbBaseStrategy
 {
-
     public function getBuildDataClass()
     {
         $this->config->getewayUrl = 'https://b2b.cmbchina.com/CmbBank_B2B/UI/NetPay/DoBusiness.ashx';
@@ -40,7 +39,8 @@ class PubKeyHelper extends CmbBaseStrategy
         // 正确情况
         $rData = array(
             'is_success'    => 'T',
-            'response'  => array(                 'pub_key'   => $retData['fbPubKey'],
+            'response'  => array(
+	        'pub_key'   => $retData['fbPubKey'],
                 'channel'   => Config::CMB_PUB_KEY,
                 'time'   => date('Y-m-d H:i:s', strtotime($retData['dateTime'])),// Y-m-d H:i:s,
             ),

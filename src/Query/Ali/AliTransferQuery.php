@@ -59,7 +59,8 @@ class AliTransferQuery extends AliBaseStrategy
 
         $retData = array(
             'is_success'    => 'T',
-            'response'  => array(                 'transaction_id'   => ArrayUtil::get($data, 'order_id'),// 支付宝订单号
+            'response'  => array(
+	        'transaction_id'   => ArrayUtil::get($data, 'order_id'),// 支付宝订单号
                 'status'   => strtolower(ArrayUtil::get($data, 'status')),
                 'pay_date' => ArrayUtil::get($data, 'pay_date'),// 转账日期
                 'arrival_time_end' => ArrayUtil::get($data, 'arrival_time_end'),// 预计到账时间，转账到银行卡专用，格式为yyyy-MM-dd HH:mm:ss

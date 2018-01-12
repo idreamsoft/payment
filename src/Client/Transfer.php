@@ -17,7 +17,6 @@ use Payment\TransferContext;
  */
 class Transfer
 {
-
     private static $supportChannel = array(
         Config::ALI_TRANSFER,// 支付宝
 

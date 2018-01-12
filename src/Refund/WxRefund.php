@@ -68,7 +68,8 @@ class WxRefund extends WxBaseStrategy
 
         $retData = array(
             'is_success'    => 'T',
-            'response'  => array(                 'transaction_id'   => $data['transaction_id'],
+            'response'  => array(
+	        'transaction_id'   => $data['transaction_id'],
                 'order_no'  => $data['out_trade_no'],
                 'refund_no' => $data['out_refund_no'],
                 'refund_id' => $data['refund_id'],

@@ -99,7 +99,8 @@ class WxRefundQuery extends WxBaseStrategy
 
         $retData = array(
             'is_success'    => 'T',
-            'response'  => array(                 'amount'   => $totalFee,// 订单总金额
+            'response'  => array(
+	        'amount'   => $totalFee,// 订单总金额
                 'order_no'   => $data['out_trade_no'],// 商户订单号
                 'transaction_id'   => $data['transaction_id'],// 微信订单号
                 'refund_count' => $data['refund_count'],// 退款总笔数

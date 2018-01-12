@@ -42,7 +42,8 @@ class CmbChargeQuery extends CmbBaseStrategy
         // 正确情况
         $retData = array(
             'is_success'    => 'T',
-            'response'  => array(                 'amount'   => $ret['orderAmount'],
+            'response'  => array( 
+	        'amount'   => $ret['orderAmount'],
                 'channel'   => Config::CMB_CHARGE,
                 'order_no'   => $ret['orderNo'],
                 'trade_state'   => $this->getTradeStatus($ret['orderStatus']),

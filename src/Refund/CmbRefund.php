@@ -41,7 +41,8 @@ class CmbRefund extends CmbBaseStrategy
         // 正确情况
         $retData = array(
             'is_success'    => 'T',
-            'response'  => array(                 'transaction_id'   => $rsqData['bankSerialNo'],// 银行的退款流水号
+            'response'  => array(
+	        'transaction_id'   => $rsqData['bankSerialNo'],// 银行的退款流水号
                 'order_no'  => $ret['reqData']['orderNo'],
                 'date' => $ret['reqData']['date'],
                 'refund_no' => trim($rsqData['refundSerialNo']),//退款流水号,商户生成

@@ -52,7 +52,8 @@ class AliRefund extends AliBaseStrategy
         }
 
         if ($ret['code'] !== '10000') {
-            return array(                 'is_success'    => 'F',
+            return array(
+	       'is_success'    => 'F',
                 'error' => $ret['sub_msg'],
                 'refund_no' => $refundNo
             );
@@ -60,7 +61,8 @@ class AliRefund extends AliBaseStrategy
 
         $retData = array(
             'is_success'    => 'T',
-            'response'  => array(                 'transaction_id'   => $ret['trade_no'],
+            'response'  => array(
+	       'transaction_id'   => $ret['trade_no'],
                 'order_no'  => $ret['out_trade_no'],
                 'logon_id'   => $ret['buyer_logon_id'],
                 'fund_change' => $ret['fund_change'],// 本次退款是否发生了资金变化

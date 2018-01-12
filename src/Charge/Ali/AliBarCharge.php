@@ -35,7 +35,8 @@ class AliBarCharge extends AliBaseStrategy
             'buyer_logon_id' => 'day***@gmail.com',
             'buyer_pay_amount' => '0.01',
             'buyer_user_id' => '2088002162809334',
-            'fund_bill_list' => array(             array('amount' => '0.01', 'fund_channel' => 'ALIPAYACCOUNT'),
+            'fund_bill_list' => array(             
+             array('amount' => '0.01', 'fund_channel' => 'ALIPAYACCOUNT'),
             ),
             'gmt_payment' => '2017-03-05 22:27:46',
             'open_id' => '20880008025007264081318860117433',

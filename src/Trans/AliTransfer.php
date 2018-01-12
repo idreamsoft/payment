@@ -44,8 +44,8 @@ class AliTransfer extends AliBaseStrategy
     protected function createBackData(array $data)
     {
         if ($this->config->returnRaw) {
-            $retData['channel'] = Config::ALI_TRANSFER;
-            return $retData;
+            $data['channel'] = Config::ALI_TRANSFER;
+            return $data;
         }
 
         if ($data['code'] !== '10000') {
@@ -58,7 +58,8 @@ class AliTransfer extends AliBaseStrategy
 
         $retData = array(
             'is_success'    => 'T',
-            'response'  => array(                 'trans_no'  => $data['out_biz_no'],// 商户转账唯一订单号
+            'response'  => array(
+                'trans_no'  => $data['out_biz_no'],// 商户转账唯一订单号
                 'transaction_id'   => $data['order_id'],// 支付宝转账单据号
                 'pay_date'   => $data['pay_date'],// 支付时间
                 'channel'   => Config::ALI_TRANSFER,
