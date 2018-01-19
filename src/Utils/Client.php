@@ -24,7 +24,6 @@ class Client
     }
     public function request($method, $uri = '', array $options = array())
     {
-var_dump($options) ;
         if($method=="POST"){
             $this->http($uri,$options);
         }else{
@@ -33,7 +32,7 @@ var_dump($options) ;
         return $this;
     }
 
-    public function http($url, $postdata=null)
+    public function http($url=null, $postdata=null)
     {
         if(empty($url)){
             $url = $this->config['base_uri'];
@@ -64,7 +63,17 @@ var_dump($options) ;
             // CURLOPT_FOLLOWLOCATION       => 1,// 使用自动跳转
             // CURLOPT_MAXREDIRS            => 7,//查找次数，防止查找太深
         );
-
+        if(is_file($postdata['cert'])&&is_file($postdata['ssl_key'])){
+            //设置证书
+            //使用证书：cert 与 key 分别属于两个.pem文件
+            $options[CURLOPT_SSLCERTTYPE] = 'PEM';
+            $options[CURLOPT_SSLCERT]     = $postdata['cert'];
+            $options[CURLOPT_SSLKEYTYPE]  = 'PEM';
+            $options[CURLOPT_SSLKEY]      = $postdata['ssl_key'];
+        }
+        if(defined('CURLOPT_IPRESOLVE') && defined('CURL_IPRESOLVE_V4')){
+            $options[CURLOPT_IPRESOLVE] = CURL_IPRESOLVE_V4;
+        }
         if ($postdata!==null) {
             isset($postdata['form_params']) && $postdata['body'] = $postdata['form_params'];
             $options[CURLOPT_POST] = 1;
@@ -77,9 +86,6 @@ var_dump($options) ;
         $this->CURL_ERROR = curl_error($ch);
         $errno = curl_errno($ch);
 
-var_dump($this->CURL_INFO);
-var_dump($this->CURL_BODY);
-echo "<hr />";
         // self::$debug && var_dump($response);
         curl_close ($ch);
 
@@ -150,43 +156,8 @@ echo "<hr />";
      */
     private function configureDefaults(array $config)
     {
-        $defaults = array(
-            'allow_redirects' => array(
-                'max'             => 5,
-                'protocols'       => array('http', 'https'),
-                'strict'          => false,
-                'referer'         => false,
-                'track_redirects' => false,
-            ),
-            'http_errors'     => true,
-            'decode_content'  => true,
-            'verify'          => true,
-            'cookies'         => false
-        );
 
-        // Use the standard Linux HTTP_PROXY and HTTPS_PROXY if set.
-
-        // We can only trust the HTTP_PROXY environment variable in a CLI
-        // process due to the fact that PHP has no reliable mechanism to
-        // get environment variables that start with "HTTP_".
-        if (php_sapi_name() == 'cli' && getenv('HTTP_PROXY')) {
-            $defaults['proxy']['http'] = getenv('HTTP_PROXY');
-        }
-
-        if ($proxy = getenv('HTTPS_PROXY')) {
-            $defaults['proxy']['https'] = $proxy;
-        }
-
-        if ($noProxy = getenv('NO_PROXY')) {
-            $cleanedNoProxy = str_replace(' ', '', $noProxy);
-            $defaults['proxy']['no'] = explode(',', $cleanedNoProxy);
-        }
-
-        $this->config = $config + $defaults;
-
-        if (!empty($config['cookies']) && $config['cookies'] === true) {
-            // $this->config['cookies'] = new CookieJar();
-        }
+        $this->config = $config;
 
         // Add the default user-agent header.
         if (!isset($this->config['headers'])) {
