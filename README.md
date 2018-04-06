@@ -13,7 +13,9 @@
 ----
 
 >
-Payment 需要 PHP &gt;= 5.6以上的版本，并且同时需要PHP安装以下扩展
+[官方版本]Payment 需要 PHP &gt;= 5.6以上的版本，并且同时需要PHP安装以下扩展
+
+[本修改版本]Payment 需要 PHP &gt;= 5.3以上的版本，并且同时需要PHP安装以下扩展
 
 ```
 - cUR extension

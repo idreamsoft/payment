@@ -13,7 +13,7 @@ defined('JSON_UNESCAPED_UNICODE') OR define('JSON_UNESCAPED_UNICODE',0);
  */
 final class Config
 {
-    const VERSION = '4.1.4-dev';
+    const VERSION = '4.1.5';
 
     //========================= ali相关接口 =======================//
     // 支付相关常量
