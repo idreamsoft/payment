@@ -10,7 +10,8 @@ header('Content-Type: text/html; charset=UTF-8');
 ini_set('display_errors','ON');
 error_reporting(E_ALL & ~E_NOTICE);
 
-return array(     'use_sandbox'       => true,// 是否使用 招商测试系统
+return array(
+    'use_sandbox'       => true,// 是否使用 招商测试系统
 
     'branch_no'         => 'xxx',  // 商户分行号，4位数字
     'merchant_no'       => 'xxxx',// 商户号，6位数字
@@ -21,7 +22,8 @@ return array(     'use_sandbox'       => true,// 是否使用 招商测试系统
 
     'op_pwd'            => 'xxxxx',// 操作员登录密码。
     'sign_type'         => 'SHA-256',// 签名算法,固定为“SHA-256”
-    'limit_pay'         => array(         //'A',
+    'limit_pay'         => array(
+    //'A',
     ),// 允许支付的卡类型,默认对支付卡种不做限制，储蓄卡和信用卡均可支付   A:储蓄卡支付，即禁止信用卡支付
 
     'notify_url'        => 'http://114.215.86.31/__readme/phpinfo.php',// 支付成功的回调

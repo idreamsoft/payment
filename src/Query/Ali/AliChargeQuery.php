@@ -64,7 +64,8 @@ class AliChargeQuery extends AliBaseStrategy
     {
         // 新版本
         if ($data['code'] !== '10000') {
-            return array(                 'is_success'    => 'F',
+	    return array(
+                'is_success'    => 'F',
                 'error' => $data['sub_msg'],
                 'channel'   => Config::ALI_CHARGE,
             );

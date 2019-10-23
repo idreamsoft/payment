@@ -42,7 +42,7 @@ class RsaEncrypt
 
         $res = openssl_get_privatekey($this->key);
         if (empty($res)) {
-            throw new \Exception('您使用的私钥格式错误，请检查RSA私钥配置');
+            trigger_error('您使用的私钥格式错误，请检查RSA私钥配置');
         }
 
         openssl_sign($data, $sign, $res);
@@ -68,7 +68,7 @@ class RsaEncrypt
 
         $res = openssl_get_privatekey($this->key);
         if (empty($res)) {
-            throw new \Exception('您使用的私钥格式错误，请检查RSA私钥配置');
+            trigger_error('您使用的私钥格式错误，请检查RSA私钥配置');
         }
 
         //用base64将内容还原成二进制
@@ -97,7 +97,7 @@ class RsaEncrypt
         // 初始时，使用公钥key
         $res = openssl_get_publickey($this->key);
         if (empty($res)) {
-            throw new \Exception('支付宝RSA公钥错误。请检查公钥文件格式是否正确');
+            trigger_error('支付宝RSA公钥错误。请检查公钥文件格式是否正确');
         }
 
         $result = (bool)openssl_verify($data, base64_decode($sign), $res);

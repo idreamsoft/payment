@@ -89,7 +89,7 @@ class ArrayUtil
     public static function createLinkstring($para)
     {
         if (! is_array($para)) {
-            throw new \Exception('必须传入数组参数');
+            trigger_error('必须传入数组参数');
         }
 
         reset($para);

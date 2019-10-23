@@ -42,10 +42,10 @@ class Rsa2Encrypt
 
         $res = openssl_get_privatekey($this->key);
         if (empty($res)) {
-            throw new \Exception('您使用的私钥格式错误，请检查RSA私钥配置');
+            trigger_error('您使用的私钥格式错误，请检查RSA私钥配置');
         }
 
-        openssl_sign($data, $sign, $res, OPENSSL_ALGO_SHA256);
+        openssl_sign($data, $sign, $res, version_compare(PHP_VERSION,'5.4.0', '<') ? 'SHA256' : OPENSSL_ALGO_SHA256);
         openssl_free_key($res);
 
         //base64编码
@@ -68,7 +68,7 @@ class Rsa2Encrypt
 
         $res = openssl_get_privatekey($this->key);
         if (empty($res)) {
-            throw new \Exception('您使用的私钥格式错误，请检查RSA私钥配置');
+            trigger_error('您使用的私钥格式错误，请检查RSA私钥配置');
         }
 
         //用base64将内容还原成二进制
@@ -100,10 +100,10 @@ class Rsa2Encrypt
         // 初始时，使用公钥key
         $res = openssl_get_publickey($this->key);
         if (empty($res)) {
-            throw new \Exception('支付宝RSA公钥错误。请检查公钥文件格式是否正确');
+            trigger_error('支付宝RSA公钥错误。请检查公钥文件格式是否正确');
         }
 
-        $result = (bool)openssl_verify($data, base64_decode($sign), $res, OPENSSL_ALGO_SHA256);
+        $result = (bool)openssl_verify($data, base64_decode($sign), $res, version_compare(PHP_VERSION,'5.4.0', '<') ? 'SHA256' : OPENSSL_ALGO_SHA256);
         openssl_free_key($res);
         return $result;
     }

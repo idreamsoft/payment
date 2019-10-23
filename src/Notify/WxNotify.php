@@ -124,6 +124,7 @@ class WxNotify extends NotifyStrategy
         $cashFee = bcdiv($data['cash_fee'], 100, 2);
 
         $retData = array(
+            'app_id' => $data['appid'],
             'bank_type' => $data['bank_type'],
             'cash_fee' => $cashFee,
             'device_info' => $data['device_info'],

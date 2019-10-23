@@ -4,7 +4,12 @@
 
 -----
 
-## 提醒：发现有人将我提供的支付宝测试账号乱修改资料，打广告。请大家不要加上面的任何联系方式。如果再发现，我就把测试账号注销了（怕大家被骗）
+## 提醒：微信CA证书进行了更新，请更新项目到最新版本。否则5月29日后，将无法支付
+> 官方公告： https://pay.weixin.qq.com/index.php/public/cms/content_detail?lang=zh&id=56602
+
+## 你们需要干什么：
+- 当前如果使用的4.x版本，请更新到: **4.1.7**
+- 当前如果使用的x.x版本，请更新到: **3.1.5**
 
 - [Payment使用文档](https://helei112g1.gitbooks.io/payment-sdk/content/)
 - [Payment使用常见问题汇总](https://helei112g1.gitbooks.io/payment-sdk/content/faq.html)
@@ -24,22 +29,13 @@
 
 - BC Math
 
-- Guzzle
+- Guzzle (官方版本需要)
 ```
 guzzle 是一个开源的php http请求lib，[项目地址](https://github.com/guzzle/guzzle)
 
-<p align="center">
-    <b>成都本地内推微信公众号，有需要的拿走:</b>
-    <br><br>
-</p>
-<p align="center">
-    <img src="http://ol59nqr1i.bkt.clouddn.com/neituisologan.jpeg" width=350>
-    <img src="http://ol59nqr1i.bkt.clouddn.com/neituiqr.jpeg" width="200" >
-</p>
-
 # Payment是什么？
 
-Payment是一个集成了 **支付宝支付**、**微信支付**、**招商支付**的PHP SDK。服务端开发者将它集成到自己的项目中，可以方便的通过相同的操作方式进行各项支付操作。不在需要开发者去单独了解支付宝、微信、招商的接口文档。以发起支付举例，开发者只需要通过：
+Payment是一个集成了 **支付宝支付**、**微信支付**、**招商支付**的PHP SDK。服务端开发者将它集成到自己的项目中，可以方便的通过相同的操作方式进行各项支付操作。不再需要开发者去单独了解支付宝、微信、招商的接口文档。以发起支付举例，开发者只需要通过：
 
 ```
 try {
@@ -102,14 +98,14 @@ Payment支持所有的PHP项目，只要求PHP版本大于等于5.6即可。同�
 通过composer，这是推荐的方式，可以使用composer.json 声明依赖，或者直接运行下面的命令。
 
 ```php
-    composer require "riverslei/payment:~4.0.0"
+    composer require "riverslei/payment:*"
 ```
 
 放入composer.json文件中
 
 ```php
     "require": {
-        "riverslei/payment": "~4.0.0"
+        "riverslei/payment": "*"
     }
 ```
 
@@ -118,15 +114,6 @@ Payment支持所有的PHP项目，只要求PHP版本大于等于5.6即可。同�
 ```
 composer update
 ```
-
-# Change Log #
-- 接入支付宝电脑网站支付、微信服务商模式支持(from v4.0.0)
-- 加入招商一网通支付，加入详细的demo(from v3.1.0)
-- 支付宝密钥支持字符串、文件两种方式配置，微信支持HMAC-SHA256加密（from v3.0.1）
-- 支持支付宝rsa2签名 加入支付宝当面付-条码支付(条码与声波两种模式)   微信加入刷卡支付、小程序支付、H5支付  提供客户端静态调用类 不再兼容支付宝老版本接口（from v3.0.0）
-- 支持支付宝新版本支付接口（from v2.7.0）
-- 配置文件控制权限由使用者控制（from v2.0.0）
-
 ----
 
 
@@ -134,18 +121,14 @@ composer update
 
 感谢朋友们的支持：[支持名单](SUPPORT.md)
 
-<p align="center">
-    <img src="http://ol59nqr1i.bkt.clouddn.com/mp-qr.jpg">
-    <p align="center">个人公众号：icanfo</p>
-    <p align="center">联系邮箱：dayugog@gmail.com</p>
-</p>
-
-----
-
-<p align="center">
-    <img src="http://ol59nqr1i.bkt.clouddn.com/pay-qr.jpg?imageView2/2/w/500/h/400">
-    <p align="center">打赏扫这里，请留下尊姓大名</p>
-</p>
+<div style="margin:0 auto;">
+    <p align="center" style="margin:0px;"><img src="https://dayutalk.cn/img/mp-qrcode.jpg"></p>
+    <p align="center" style="margin:0px;">个人公众号：<b>dayuTalk</b></p>
+    <p align="center" style="margin:0px;">联系邮箱：dayugog@gmail.com</p>
+    <p align="center" style="margin:0px;">GitHub：<a href="https://github.com/helei112g">https://github.com/helei112g</a></p>
+    <p align="center" style="margin:0px;"><img width="500" src="https://dayutalk.cn/img/pay-qr.jpeg"></p>
+    <p align="center" style="margin:0px;"><b>我写我的，你赏你的</b></p>
+</div>
 
 # Contribution #
 [Contribution Guide](CONTRIBUTING.md)

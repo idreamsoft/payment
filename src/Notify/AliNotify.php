@@ -7,7 +7,7 @@ use Payment\Config;
 use Payment\Utils\ArrayUtil;
 use Payment\Utils\Rsa2Encrypt;
 use Payment\Utils\RsaEncrypt;
-
+use Payment\Utils\DataParser;
 /**
  * @author: helei
  * @createTime: 2016-07-20 16:21
@@ -139,11 +139,25 @@ class AliNotify extends NotifyStrategy
      */
     protected function replyNotify($flag, $msg = '')
     {
-        if ($flag) {
-            return 'success';
-        } else {
-            return 'fail';
+        // 默认为成功
+        $result = array(
+            'return_code'   => 'SUCCESS',
+            'return_msg'    => 'OK',
+        );
+        if (! $flag) {
+            // 失败
+            $result = array(
+                'return_code'   => 'FAIL',
+                'return_msg'    => $msg,
+            );
         }
+
+        return $result;
+        // if ($flag) {
+        //     return 'success';
+        // } else {
+        //     return 'fail';
+        // }
     }
 
     /**

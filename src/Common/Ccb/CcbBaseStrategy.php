@@ -2,8 +2,7 @@
 
 namespace Payment\Common\Cmb;
 
-//use GuzzleHttp\Client;
-use Payment\Utils\Client;
+use GuzzleHttp\Client;
 use Payment\Common\BaseData;
 use Payment\Common\BaseStrategy;
 use Payment\Common\CmbConfig;
@@ -12,11 +11,11 @@ use Payment\Config;
 
 /**
  * Created by PhpStorm.
- * User: helei
+ * User: zhoujing
  * Date: 2017/4/27
  * Time: 下午12:36
  */
-abstract class CmbBaseStrategy implements BaseStrategy
+abstract class CcbBaseStrategy implements BaseStrategy
 {
     /**
      * 招商的配置文件
@@ -38,7 +37,7 @@ abstract class CmbBaseStrategy implements BaseStrategy
     public function __construct(array $config)
     {
         try {
-            $this->config = new CmbConfig($config);
+            $this->config = new CcbConfig($config);
         } catch (PayException $e) {
             throw $e;
         }
@@ -77,11 +76,11 @@ abstract class CmbBaseStrategy implements BaseStrategy
     {
         $json = json_encode($ret, JSON_UNESCAPED_UNICODE);
 
-        $reqData = array(
+        $reqData = [
             'url' => $this->config->getewayUrl,
-            'name' => CmbConfig::REQ_FILED_NAME,
+            'name' => CcbConfig::REQ_FILED_NAME,
             'value' => $json,
-        );
+        ];
         return $reqData;
     }
 
@@ -94,17 +93,14 @@ abstract class CmbBaseStrategy implements BaseStrategy
      */
     protected function sendReq($json)
     {
-        $client = new Client(array(
+        $client = new Client([
             'timeout' => '10.0'
-        ));
+        ]);
         // @note: 微信部分接口并不需要证书支持。这里为了统一，全部携带证书进行请求
-        $options = array(
-            'headers' => array(
-                'content-type' => 'multipart/form-data',
-            ),
+        $options = [
             'body' => $json,
             'http_errors' => false
-        );
+        ];
         $response = $client->request('POST', $this->config->getewayUrl, $options);
         if ($response->getStatusCode() != '200') {
             throw new PayException('网络发生错误，请稍后再试curl返回码：' . $response->getReasonPhrase());
@@ -115,7 +111,7 @@ abstract class CmbBaseStrategy implements BaseStrategy
         // TODO 检查返回的数据是否被篡改
         $flag = $this->verifySign($data);
         if (!$flag) {
-            throw new PayException('招商返回数据被篡改。请检查网络是否安全！');
+            throw new PayException('微信返回数据被篡改。请检查网络是否安全！');
         }
 
         $rspData = $data['rspData'];
